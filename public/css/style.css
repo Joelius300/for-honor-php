@@ -3,6 +3,24 @@ body {
 }
 
 .fighter_box{
-  padding: 100px;
-  background-color: black
+  padding: 20px;
+  margin: 100px auto;
+  background-color: lightgray;
+
+  height: 600px;
+}
+
+.fighter_info{
+  position: absolute;
+}
+
+.points{
+  display: flex;
+}
+
+.point{
+  height: 40px;
+  width: 30px;
+  border: solid;
+  border-width: 1px;
 }
