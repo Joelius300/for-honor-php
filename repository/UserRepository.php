@@ -18,19 +18,22 @@ class UserRepository extends Repository
     /**
      * Erstellt einen neuen benutzer mit den gegebenen Werten.
      *
-     * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA3
+     * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA2
      *  Algorythmus gehashed.
      *
      * @throws Exception falls das Ausführen des Statements fehlschlägt
      */
     public function create($username, $password)
     {
-        $password = sha3($password);
+        $salt = 'oü9ggih8dfaw4';
+        $password = hash('sha256', ($password . $salt));
 
-        $query = "INSERT INTO $this->tableName (`Username`, `Password`) VALUES (?, ?)";
+        $table = $this->tableName;
+
+        $query = "INSERT INTO $table (`Username`, `Password`) VALUES (?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ssss', $username, $password);
+        $statement->bind_param('ss', $username, $password);
         
         if (!$statement->execute()) {
             throw new Exception($statement->error);

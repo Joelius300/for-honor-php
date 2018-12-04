@@ -1,3 +1,14 @@
+ <!-- Bootstrap core CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet">
+
 <?php
 
 /**
@@ -53,6 +64,7 @@
  *     <?php } ?>
  *   </ul>
  */
+
 class View
 {
     private $viewfile;
@@ -63,7 +75,7 @@ class View
     {
         $this->viewfile = "./../views/$viewfile.php";
         if(!file_exists($this->viewfile)){
-            $this->viewfile = "./../views/default_index.php";
+            $this->viewfile = "./../views/home.php";
         }
     }
 
@@ -84,8 +96,7 @@ class View
     public function display()
     {
         extract($this->properties);
-
-        require '../views/header.php';
+        
         require $this->viewfile;
     }
 }

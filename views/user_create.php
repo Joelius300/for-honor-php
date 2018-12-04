@@ -1,33 +1,37 @@
-<form class="form-horizontal" action="/user/doCreate" method="post">
+<form data-toggle="validator" class="form-horizontal" action="/user/save" method="post">
 	<div class="component" data-html="true">
 		<div class="form-group">
-		  <label class="col-md-2 control-label" for="firstName">Vorname</label>
+		  <label class="col-md-2 control-label" for="textinput">Benutzername</label>
 		  <div class="col-md-4">
-		  	<input id="firstName" name="firstName" type="text" placeholder="Vorname" class="form-control input-md">
+		  	<input id="username" name="username" type="text" class="form-control input-md" maxlength='30' placeholder='Benutzername' required>
+		  </div>
+		</div>
+		<!-- <div class="form-group">
+		  <label class="col-md-2 control-label" for="textinput">Passwort</label>
+		  <div class="col-md-4">
+		  	<input id="password" name="password" type="password" class="form-control input-md">
 		  </div>
 		</div>
 		<div class="form-group">
-		  <label class="col-md-2 control-label" for="lastName">Nachname</label>
+		  <label class="col-md-2 control-label" for="textinput">Passwort bestätigen</label>
 		  <div class="col-md-4">
-		  	<input id="lastName" name="lastName" type="text" placeholder="Nachname" class="form-control input-md">
+		  	<input id="passwordConfirm" name="passwordConfirm" type="password" class="form-control input-md">
 		  </div>
-		</div>
+		</div> -->
+
 		<div class="form-group">
-		  <label class="col-md-2 control-label" for="email">Mail</label>
-		  <div class="col-md-4">
-		  	<input id="email" name="email" type="text" placeholder="Mail" class="form-control input-md">
-		  </div>
-		</div>
+			<label class="col-md-2 control-label" for="textinput">Passwort</label>
+    	<div class="col-md-4">
+        <input name='password' type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Passwort" required>
+        <div class="help-block">Minimum of 6 characters</div>
+				<input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" placeholder="Password bestätigen" required>
+      </div>
+    </div>
+
 		<div class="form-group">
-		  <label class="col-md-2 control-label" for="password">Passwort</label>
+	      <label class="col-md-2 control-label" for="textinput">&nbsp;</label>
 		  <div class="col-md-4">
-		  	<input id="password" name="password" type="password" placeholder="Passwort" class="form-control input-md">
-		  </div>
-		</div>
-		<div class="form-group">
-	      <label class="col-md-2 control-label" for="send">&nbsp;</label>
-		  <div class="col-md-4">
-		    <input id="send" name="send" type="submit" class="btn btn-primary">
+		    <input id="submit" name="submit" type="submit" class="btn btn-primary">
 		  </div>
 		</div>
 	</div>

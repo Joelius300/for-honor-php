@@ -20,9 +20,9 @@ return array(
 
     // Datebankkonfiguration
     'database' => array(
-        'host'     => 'localhost',
-        'username' => 'forHonorUser',
-        'password' => 'forHonor123',
+        'host'     => 'localhost:3306',
+        'username' => 'root',
+        'password' => '',
         'database' => 'forhonor',
     ),
 

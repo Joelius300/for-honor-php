@@ -1,6 +1,6 @@
 <?php
 
-require_once '../repository/UserRepository.php';
+require_once('../repository/UserRepository.php');
 require_once("../lib/View.php");
 
 /**
@@ -8,6 +8,12 @@ require_once("../lib/View.php");
  */
 class UserController
 {
+    private $repos;
+
+    public function __construct(){
+        $this->repos = new UserRepository();
+    }
+
     public function index()
     {
         //Anfrage an die URI /user/crate weiterleiten (HTTP 302)
@@ -21,7 +27,8 @@ class UserController
         $view->display();
     }
 
-    public function save($username, $password){
-        $data->save($username, $password);  
+    public function save(){
+        $this->repos->create($_POST['username'], $_POST['password']); 
+        header('Location: /user/create');
     }
 }
