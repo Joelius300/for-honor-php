@@ -1,3 +1,8 @@
 body {
   padding-top: 50px;
 }
+
+.fighter_box{
+  padding: 100px;
+  background-color: black
+}
