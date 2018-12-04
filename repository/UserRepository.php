@@ -18,7 +18,7 @@ class UserRepository extends Repository
     /**
      * Erstellt einen neuen benutzer mit den gegebenen Werten.
      *
-     * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA2
+     * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA256
      *  Algorythmus gehashed.
      *
      * @throws Exception falls das Ausführen des Statements fehlschlägt

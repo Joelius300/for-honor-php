@@ -1,5 +1,10 @@
 <?php
-class Fighter{
+
+require_once 'tank.php';
+require_once 'assassin.php';
+require_once 'warrior.php';
+
+abstract class Fighter{
     private static $Classes = array('Tank', 'Assassin', 'Warrior');
 
     public static function ResolveClass($id){
@@ -12,6 +17,15 @@ class Fighter{
         }
     }
 
-    
+    public static $multiplier = 20;
+
+
+    public $health;
+    public $strength;
+
+    public $class;
+
+
+    public abstract function Attack($enemy);
 }
 ?>

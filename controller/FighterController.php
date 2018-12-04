@@ -34,9 +34,7 @@ class FighterController{
 
     public function save(){
         $this->repos->save(); 
-        header('Location: /');
+        header('Location: /Home');
     }
-
-
 }
 ?>
