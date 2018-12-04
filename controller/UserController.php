@@ -3,9 +3,7 @@
 require_once('../repository/UserRepository.php');
 require_once("../lib/View.php");
 
-/**
- * Siehe Dokumentation im DefaultController.
- */
+
 class UserController
 {
     private $repos;
