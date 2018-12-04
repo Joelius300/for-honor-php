@@ -41,7 +41,6 @@ class DefaultController
 
         $view = new View('home');
         $view->title = 'Startseite';
-        $view->heading = 'Startseite';
         $view->display();
     }
 }
