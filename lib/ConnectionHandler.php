@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * ALLE KOMMENTARE HIER SIND VOM STANDARD BBC-MVC FRAMEWORK UND STIMMEN EVENTUELL 
+ * NICHT MIT DEN EFFEKTIVEN IMPLEMENTIERUNGEN ÜBEREIN!
+ * 
+ * 
  * Der ConnectionHandler ist dafür zuständig, allen Repositories ein und die
  * selbe Verbindung auf die Datenbank zur Verfügung zu stellen.
  *

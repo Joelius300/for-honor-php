@@ -4,36 +4,35 @@ require_once '../lib/Repository.php';
 
 /**
  * Das UserRepository ist zuständig für alle Zugriffe auf die Tabelle "user".
- *
- * Die Ausführliche Dokumentation zu Repositories findest du in der Repository Klasse.
  */
 class UserRepository extends Repository
 {
     /**
-     * Diese Variable wird von der Klasse Repository verwendet, um generische
-     * Funktionen zur Verfügung zu stellen.
+     * Diese Variable stellt den Namen der Tabelle auf dem SQL-Server dar.
      */
     protected $tableName = 'user';
 
     /**
-     * Erstellt einen neuen benutzer mit den gegebenen Werten.
+     * Speichert einen neuen benutzer mit Username und Passwort.
      *
-     * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA256
-     *  Algorythmus gehashed.
-     *
-     * @throws Exception falls das Ausführen des Statements fehlschlägt
+     * Das Passwort wird mit PHP eigenen Funktionen gehashed.
      */
-    public function create($username, $password)
+    public function insert($username, $password)
     {
-        $salt = 'oü9ggih8dfaw4';
-        $password = hash('sha256', ($password . $salt));
+        //$salt = 'oü9ggih8dfaw4';
+        //$password = hash('sha256', ($password . $salt));
 
-        $table = $this->tableName;
+        $options = array(
+            'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+            'cost' => 12,
+          );
 
-        $query = "INSERT INTO $table (`Username`, `Password`) VALUES (?, ?)";
+        $password = password_hash($password, PASSWORD_BCRYPT, $options);
+
+        $query = "INSERT INTO $this->tableName (`Username`, `Password`) VALUES (?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ss', $username, $password);
+        $statement->bind_param('ss', $username, $password); //bindet die beiden Variablen als zwei Strings (ss) zu den Parametern
         
         if (!$statement->execute()) {
             throw new Exception($statement->error);

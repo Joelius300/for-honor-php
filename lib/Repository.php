@@ -3,6 +3,10 @@
 require_once 'ConnectionHandler.php';
 
 /**
+ * ALLE KOMMENTARE HIER SIND VOM STANDARD BBC-MVC FRAMEWORK UND STIMMEN EVENTUELL 
+ * NICHT MIT DEN EFFEKTIVEN IMPLEMENTIERUNGEN ÜBEREIN!
+ * 
+ * 
  * Das Model ist das M in MVC. Es ist zustängig für alles, was mit der Datenbank
  * zu tun hat. Dazu gehört zum Beispiel:
  *   - Einzelner Datensatz aus der Datenbenk auslesen (SELECT...  WHERE id =)

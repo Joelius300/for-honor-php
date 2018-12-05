@@ -3,9 +3,7 @@
 require_once '../lib/Repository.php';
 
 /**
- * Das UserRepository ist zuständig für alle Zugriffe auf die Tabelle "user".
- *
- * Die Ausführliche Dokumentation zu Repositories findest du in der Repository Klasse.
+ * Das FighterRepository ist zuständig für alle Zugriffe auf die Tabelle "fighter".
  */
 class FighterRepository extends Repository
 {
@@ -16,14 +14,9 @@ class FighterRepository extends Repository
     protected $tableName = 'fighter';
 
     /**
-     * Erstellt einen neuen benutzer mit den gegebenen Werten.
-     *
-     * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA2
-     *  Algorythmus gehashed.
-     *
-     * @throws Exception falls das Ausführen des Statements fehlschlägt
+     * Speichert einen neuen Fighter in die Datenbank
      */
-    public function create()
+    public function insert()
     {
         
     }

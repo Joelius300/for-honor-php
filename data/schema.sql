@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `Username` varchar(30) NOT NULL,
- `Password` varchar(100) NOT NULL,
+ `Password` varchar(255) NOT NULL,
  `Fighter_ID` int(11) DEFAULT NULL,
  `Wins` int(11) NOT NULL DEFAULT '0',
  `TotalGames` int(11) NOT NULL DEFAULT '0',

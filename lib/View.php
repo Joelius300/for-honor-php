@@ -12,6 +12,10 @@
 <?php
 
 /**
+ * ALLE KOMMENTARE HIER SIND VOM STANDARD BBC-MVC FRAMEWORK UND STIMMEN EVENTUELL 
+ * NICHT MIT DEN EFFEKTIVEN IMPLEMENTIERUNGEN ÜBEREIN!
+ * 
+ * 
  * Die View is das V aus MVC. Dabei geht es um alles, was dem Client (Browser)
  * als Antwort auf einen Request zurückgegeben wird. Im Normalfall ist das der
  * HTML Code.

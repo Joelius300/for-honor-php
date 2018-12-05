@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * 
+ * ALLE KOMMENTARE HIER SIND VOM STANDARD BBC-MVC FRAMEWORK UND STIMMEN EVENTUELL 
+ * NICHT MIT DEN EFFEKTIVEN IMPLEMENTIERUNGEN ÜBEREIN!
+ * 
+ * 
  * Der Dispatcher ist dafür zuständig, alle Requests an den entsprechenden
  * Controller weiterzuleiten.
  *
