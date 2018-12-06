@@ -40,7 +40,7 @@ class DefaultController
         require_once("../lib/View.php");
 
         $view = new View('home');
-        $view->title = 'Startseite';
+        $view->title = 'Home';
         $view->display();
     }
 }

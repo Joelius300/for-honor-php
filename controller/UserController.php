@@ -15,18 +15,42 @@ class UserController
     public function index()
     {
         //Anfrage an die URI /user/crate weiterleiten (HTTP 302)
-        header('Location: /user/create');
+        header('Location: /user/showLogin');
     }
 
-    public function create()
+    public function showCreate()
     {
         $view = new View('user_create');
         $view->title = 'Benutzer erstellen';
         $view->display();
     }
 
-    public function save(){
+    public function create(){
         $this->repos->create($_POST['username'], $_POST['password']); 
-        header('Location: /user/create');
+        header('Location: /user/showLogin');
+    }
+
+    public function showLogin(){
+        $view = new View('login');
+        $view->title = 'Login';
+        $view->username = '';
+        $view->display();
+    }
+
+    public function login(){
+        $user = $this->repos->readByUsername($_POST['username']);
+
+        if(password_verify($_POST['password'], $user['Password'])){
+            session_start();
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['userID'] = $user['id'];
+
+            header('Location: /');
+        }else{
+            $view = new View('login');
+            $view->title = 'Login';
+            $view->username = $_POST['username'];
+            $view->display();
+        }
     }
 }

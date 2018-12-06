@@ -18,23 +18,23 @@ class FighterController{
         $view->display();
     }
 
-    public function create()
+    public function showCreate()
     {
         $view = new View('fighter_create');
         $view->title = 'Kämpfer erstellen';
         $view->display();
     }
 
-    public function edit()
+    public function showEdit()
     {
         $view = new View('fighter_edit');
         $view->title = 'Kämpfer bearbeiten';
         $view->display();
     }
 
-    public function save(){
-        $this->repos->save(); 
-        header('Location: /Home');
+    public function create(){
+        $this->repos->insert(); 
+        header('Location: /');
     }
 }
 ?>

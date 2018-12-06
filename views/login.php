@@ -1,9 +1,9 @@
-<form class="form-horizontal" action="/login" method="post">
+<form class="form-horizontal" action="/user/login" method="post">
 	<div class="component" data-html="true">
 		<div class="form-group">
 		  <label class="col-md-2 control-label" for="textinput">Benutzername</label>
 		  <div class="col-md-4">
-		  	<input id="username" name="username" type="text" class="form-control input-md">
+		  	<input id="username" name="username" type="text" class="form-control input-md" value=<?= $username ?? ''?>>
 		  </div>
 		</div>
 		<div class="form-group">
