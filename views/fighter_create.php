@@ -1,4 +1,10 @@
-<?php require_once('../views/header.php'); ?>
+<?php 
+    require_once('../views/header.php'); 
+    require_once('../lib/select.php'); 
+
+    $strength = new select('strength', 10, 7);
+    $health = new select('health', 10, 5);
+?>
 
 
 
@@ -12,30 +18,8 @@
     <p id='fighter_name'>Name: <br>REEEE</p>
     <div class='fighter_info'>
         <p>Attack</p>
-        <div class='points' id='fighter_attack'>
-            <div class='point' id='attack1'></div>
-            <div class='point' id='attack2'></div>
-            <div class='point' id='attack3'></div>
-            <div class='point' id='attack4'></div>
-            <div class='point' id='attack5'></div>
-            <div class='point' id='attack6'></div>
-            <div class='point' id='attack7'></div>
-            <div class='point' id='attack8'></div>
-            <div class='point' id='attack9'></div>
-            <div class='point' id='attack10'></div>
-        </div>
+        <?php $strength->display() ?>
         <p>Health</p>
-        <div class='points' id='fighter_health'>
-            <div class='point' id='health1'></div>
-            <div class='point' id='health2'></div>
-            <div class='point' id='health3'></div>
-            <div class='point' id='health4'></div>
-            <div class='point' id='health5'></div>
-            <div class='point' id='health6'></div>
-            <div class='point' id='health7'></div>
-            <div class='point' id='health8'></div>
-            <div class='point' id='health9'></div>
-            <div class='point' id='health10'></div>
-        </div>
+        <?php $health->display() ?>
     </div>
 </div>
