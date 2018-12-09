@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet">
+    <!-- <link href="/css/style.css?v=<?=time();?>" rel="stylesheet"> -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,9 +33,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/Home">Home</a></li>
+            <!-- <li><a href="/Home">Home</a></li> -->
             <li><a href="/Fighter">Fighter</a></li>
-            <li><a href="/Fight/List">Fight</a></li>
+            <li><a href="/Fight">Fight</a></li>
+            <li><a href="/Fighter/Create">Debug: Fighter Create</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

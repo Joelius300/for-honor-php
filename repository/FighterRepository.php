@@ -16,12 +16,12 @@ class FighterRepository extends Repository
     /**
      * Speichert einen neuen Fighter in die Datenbank
      */
-    public function insert($class, $healthpoints, $strengthpoints)
+    public function insert($name, $class, $healthpoints, $strengthpoints)
     {
-        $query = "INSERT INTO $this->tableName (`Class`, `Healthpoints`, `Strengthpoints`) VALUES (?, ?, ?)";
+        $query = "INSERT INTO $this->tableName (`Name`, `Class`, `Healthpoints`, `Strengthpoints`) VALUES (?, ?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('iii', $class, $healthpoints, $strengthpoints); //bindet die Variablen als ints (i) zu den Parametern
+        $statement->bind_param('siii', $name, $class, $healthpoints, $strengthpoints); //bindet die Variablen als ints (i) zu den Parametern
         
         if (!$statement->execute()) {
             throw new Exception($statement->error);

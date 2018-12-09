@@ -1,26 +1,27 @@
 body {
-  padding-top: 50px;
+    padding-top: 50px;
 }
 
-.fighter_box{
-  padding: 20px;
-  margin: 100px auto;
-  background-color: lightgray;
-
-  height: 600px;
+.fighter_box {
+    padding: 20px;
+    margin: 100px auto;
+    background-color: lightgray;
+    height: 600px;
 }
 
-.fighter_info{
-  position: absolute;
+.class_info {
+    display: flex;
+    padding-bottom: 10px;
 }
 
-.points{
-  display: flex;
+.description {
+    margin-left: 50px;
 }
 
-.point{
-  height: 40px;
-  width: 30px;
-  border: solid;
-  border-width: 1px;
+
+/*
+this breaks stuff
+.fighter_info {
+    position: absolute;
 }
+*/

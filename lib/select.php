@@ -1,6 +1,3 @@
-<link href="/css/select.css" rel="stylesheet" type="text/css">
-<script src="/js/select.js"></script> 
-
 <?php
 class select{
 
