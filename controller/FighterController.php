@@ -3,6 +3,10 @@
 require_once('../repository/FighterRepository.php');
 require_once('../repository/UserRepository.php');
 require_once("../lib/View.php");
+require_once("../Fighter/fighter.php");
+require_once("../Fighter/assassin.php");
+require_once("../Fighter/tank.php");
+require_once("../Fighter/warrior.php");
 
 
 class FighterController{

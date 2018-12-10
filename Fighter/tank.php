@@ -8,7 +8,10 @@ class Tank extends Fighter{
     public static $BaseHealth = 7;
     public static $BaseStrength = 4;
 
-    public $BlockChance = 30;
+    public static $BlockChance = 30;
+
+    public static $Description;
+
 
     public function __construct(){
         $this->health = Tank::$BaseHealth;
@@ -17,6 +20,7 @@ class Tank extends Fighter{
         $this->class = 'Tank';
     }
 
+    
 
     public function Attack($enemy){
         switch($enemy->class){
@@ -33,7 +37,7 @@ class Tank extends Fighter{
     }
 
     private function AttackTank($enemy){
-        if(rand(1, 100) <= $enemy->BlockChance){
+        if(rand(1, 100) <= Tank::$BlockChance){
             return;
         }else{
             $enemy->health -= $this->strength;
@@ -41,7 +45,7 @@ class Tank extends Fighter{
     }
 
     private function AttackAssassin($enemy){
-        if(rand(1, 100) <= $enemy->CounterChance){
+        if(rand(1, 100) <= Assassin::$CounterChance){
             $enemy->Attack($this);
         }else{
             $enemy->health -= $this->strength;
@@ -53,5 +57,10 @@ class Tank extends Fighter{
     }
 }
 
+//PHP IS CANCER
+Tank::$Description = 
+"The Tank is able to block incoming hits by a chance of ".Tank::$BlockChance."%.
+He is not the deadliest of a fighter, but he is pretty hard to kill because of his massive shield."
+;
 
 ?>

@@ -8,7 +8,9 @@ class Assassin extends Fighter{
     public static $BaseHealth = 4;
     public static $BaseStrength = 7;
 
-    public $CounterChance = 20;
+    public static $CounterChance = 20;
+
+    public static $Description;
 
     public function __construct(){
         $this->health = Assassin::$BaseHealth;
@@ -33,7 +35,7 @@ class Assassin extends Fighter{
     }
 
     private function AttackTank($enemy){
-        if(rand(1, 100) <= $enemy->BlockChance){
+        if(rand(1, 100) <= Tank::$BlockChance){
             return;
         }else{
             $enemy->health -= $this->strength;
@@ -41,7 +43,7 @@ class Assassin extends Fighter{
     }
 
     private function AttackAssassin($enemy){
-        if(rand(1, 100) <= $enemy->CounterChance){
+        if(rand(1, 100) <= Assassin::$CounterChance){
             $enemy->Attack($this);
         }else{
             $enemy->health -= $this->strength;
@@ -53,5 +55,10 @@ class Assassin extends Fighter{
     }
 }
 
+//PHP IS CANCER
+Assassin::$Description = 
+"The Assassin is a feared killer who attacks when his enemies won't expect it.
+He is able to dodge his enemies attack and strike back by a chance of ".Assassin::$CounterChance."%."
+;
 
 ?>

@@ -5,7 +5,7 @@ He is not the deadliest of a fighter, but he is pretty hard to kill because of h
 
 Assassin:
 The Assassin is a feared killer who attacks when his enemies won't expect it.
-He is able  to dodge his enemies attack and strike back by a chance of ??%.
+He is able to dodge his enemies attack and strike back by a chance of ??%.
 
 
 Warrior:

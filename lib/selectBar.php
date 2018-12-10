@@ -1,16 +1,19 @@
 <?php
-class select{
+class selectBar{
 
     private $properties = array();
 
+    private $name;
+
     public function __construct($name, $itemsAmount, $startValue){
+        $this->name = $name;
         $this->properties['name'] = $name;
         $this->properties['itemsAmount'] = $itemsAmount;
         $this->properties['startValue'] = $startValue;
     }
 
     public function __set($key, $value)
-    {
+    {      
         if (!isset($this->$key)) {
             $this->properties[$key] = $value;
         }
@@ -27,7 +30,7 @@ class select{
     {
         extract($this->properties);
         
-        require 'selectHTML.php';
+        require 'selectBarHTML.php';
     }
 }
 ?>

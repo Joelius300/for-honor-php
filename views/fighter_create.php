@@ -1,38 +1,49 @@
 <?php 
     require_once('../views/header.php'); 
-    require_once('../lib/select.php'); 
+    require_once('../lib/selectBar.php'); 
 
-    $strength = new select('strength', 10, 7);
-    $health = new select('health', 10, 5);
+    require_once("../Fighter/fighter.php");
+    require_once("../Fighter/assassin.php");
+    require_once("../Fighter/tank.php");
+    require_once("../Fighter/warrior.php");
+
+
+    $strength = new selectBar('strength', 10, 1);
+    $health = new selectBar('health', 10, 1);
 
     $strength->selectedColor = '#770e23';
     $health->selectedColor = '#3661aa';
-
-    // /images/assassin.jpg
-    // /images/tank.jpg
-    // /images/warrior.jpg
-
 ?>
 
-
-
 <html>
-    <head></head>
+    <head>
+        <script src="/js/ClassSwitcher.js?v=<?=time();?>"></script>     
+        <script>
+            var defaults = {};
+            <?php Fighter::FillDefaults(); ?> //Fills the JS 'defaults' array
+
+            var switcher = new ClassSwitcher(defaults);
+
+            function onSelectChanged(){
+                switcher.Refresh();
+                Refresh('strength', '<?= $strength->selectedColor ?? '' ?>');
+                Refresh('health', '<?= $health->selectedColor ?? '' ?>');
+            }
+        </script>
+    </head>
     <body>
         <div class='fighter_box'>
             <form action='/Fighter/insert' method='post'>
                 <div class='class_info'>
-                    <img src='/images/tank.jpg' height='100px' width='100px'>
-                    <div class="description">
+                    <img id='classImage' src='/images/tank.jpg' height='100px' width='100px'>
+                    <div class="description" id="classDescription">
                         <p>Text</p>
                     </div>
                 </div>
                 <br>
                 <h4>Class</h4>
-                <select class="form-control">
-                    <option>Tank</option>
-                    <option>Assassin</option>
-                    <option>Warrior</option>
+                <select class="form-control" id="classSelect" onchange="onSelectChanged()" value=0>
+                    <?php Fighter::GetOptionsHTML(); ?>
                 </select>  
                 <h4>Name</h4>
                 <input class="form-control" name='name' type='text' placeholder='Name' required>
