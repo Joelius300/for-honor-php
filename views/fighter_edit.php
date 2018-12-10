@@ -43,7 +43,7 @@
                     <?= $health->display() ?>
                 </div>
 
-                <input type="submit" value="Create Fighter" class="btn btn-primary">
+                <input type="submit" value="Save" class="btn btn-primary">
             </form>
         </div>
 

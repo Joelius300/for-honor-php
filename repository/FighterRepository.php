@@ -18,7 +18,7 @@ class FighterRepository extends Repository
      */
     public function insert($name, $class, $healthpoints, $strengthpoints)
     {
-        $query = "INSERT INTO $this->tableName (`Name`, `Class`, `Healthpoints`, `Strengthpoints`) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO $this->tableName (`Name`, `Class`, `HealthPoints`, `StrengthPoints`) VALUES (?, ?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('siii', $name, $class, $healthpoints, $strengthpoints); //bindet die Variablen als ints (i) zu den Parametern
@@ -32,7 +32,7 @@ class FighterRepository extends Repository
 
     public function update($id, $name, $healthpoints, $strengthpoints)
     {
-        $query = "UPDATE $this->tableName set `Name` = ?, set `Healthpoints` = ?, set `Strengthpoints` = ? where `id` = ?";
+        $query = "UPDATE $this->tableName set `Name` = ?, `HealthPoints` = ?, `StrengthPoints` = ? where `id` = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
         $statement->bind_param('siii', $name, $healthpoints, $strengthpoints, $id); //bindet die Variablen zu den Parametern

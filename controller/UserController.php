@@ -6,6 +6,8 @@ require_once("../lib/View.php");
 
 class UserController
 {
+    public static $ERROR;
+
     private $repos;
 
     public function __construct(){
@@ -21,8 +23,10 @@ class UserController
     public function Register()
     {
         if($this->repos->insert($_POST['username'], $_POST['password']) > 0){
-            header('Location: /user/Login');
+            $this->LoginUser($_POST['username'], $_POST['password']);
+            unset(UserController::$ERROR);
         }else{
+            UserController::$ERROR = 'User already exists';
             header('Location: /user/Create');
         }
     }
@@ -56,18 +60,25 @@ class UserController
     }
 
     public function doLogin(){
+        $this->LoginUser($_POST['username'], $_POST['password']);
+    }
+
+    private function LoginUser($username, $password){
         try{
-            $user = $this->repos->readByUsername($_POST['username']);
+            $user = $this->repos->readByUsername($username);
             
-            if(password_verify($_POST['password'], $user->Password)){
+            if(!empty($user) && password_verify($password, $user->Password)){
                 $_SESSION['userID'] = $user->id;
 
+                unset(UserController::$ERROR);
                 header('Location: /');
             }else{
+                UserController::$ERROR = 'Wrong Username or Password';
                 header('Location: /user/Login');
             }
         }catch (Exception $e) {
+            UserController::$ERROR = 'Wrong Username or Password';
             header('Location: /user/Login');
-    }
+        }   
     }
 }
