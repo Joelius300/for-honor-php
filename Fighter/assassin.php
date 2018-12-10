@@ -9,7 +9,7 @@ class Assassin extends Fighter{
     public static $BaseStrength = 7;
 
     public static $CounterChance = 20;
-
+    public static $picURL = "/images/assassin.jpg";
     public static $Description;
 
     public function __construct($name){

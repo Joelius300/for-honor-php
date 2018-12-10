@@ -28,7 +28,7 @@ abstract class Fighter{
             defaults[$i].baseHealth = ". self::ResolveClass($i)::$BaseHealth .";\n\r
             defaults[$i].baseStrength = ". self::ResolveClass($i)::$BaseStrength .";\n\r
             defaults[$i].description = ". json_encode(self::ResolveClass($i)::$Description) .";\n\r
-            defaults[$i].picURL = '/images/".strtolower(self::$ClassesNames[$i]).".jpg';\n\r
+            defaults[$i].picURL = '". self::ResolveClass($i)::$picURL ."';\n\r
             ";
         }
     }

@@ -8,7 +8,7 @@
     require_once("../Fighter/warrior.php");
 
 
-    $strength = new selectBar('strength', 10, 1);
+    $strength = new selectBar('strength', 10, $Fighter->strength);
     $health = new selectBar('health', 10, 1);
 
     $strength->selectedColor = '#770e23';
@@ -22,9 +22,9 @@
         <div class='fighter_box'>
             <form action='/Fighter/insert' method='post'>
                 <div class='class_info'>
-                    <img id='classImage' src='/images/tank.jpg' height='100px' width='100px'>
+                    <img id='classImage' src='<?= $Fighter->class::$picURL ?>' height='100px' width='100px'>
                     <div class="description" id="classDescription">
-                        <p><?= $Fighter->class::$Description?></p>
+                        <p><?= $Fighter->class::$Description ?></p>
                     </div>
                 </div>
                 <br>

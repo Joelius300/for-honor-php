@@ -9,7 +9,7 @@ class Warrior extends Fighter{
     public static $BaseStrength = 5;
 
     public static $DoubleHitChance = 50;
-
+    public static $picURL = "/images/warrior.jpg";
     public static $Description;
 
     public function __construct($name){
