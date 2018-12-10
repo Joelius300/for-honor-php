@@ -1,6 +1,7 @@
 <?php
 
 require_once('../repository/FighterRepository.php');
+require_once('../repository/UserRepository.php');
 require_once("../lib/View.php");
 
 
