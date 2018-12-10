@@ -39,6 +39,7 @@ class FighterController{
         $view->title = 'Kämpfer bearbeiten';
         $view->avaiablePoints = $this->userRepos->getAvaiablePoints($loggedUser->id);
         $view->Fighter = $this->GetFighter($loggedUser->Fighter_ID);
+        $view->FighterID = $loggedUser->Fighter_ID;
         $view->display();
     }
 

@@ -9,7 +9,7 @@
 
 
     $strength = new selectBar('strength', 10, $Fighter->strength);
-    $health = new selectBar('health', 10, 1);
+    $health = new selectBar('health', 10, $Fighter->health);
 
     $strength->selectedColor = '#770e23';
     $health->selectedColor = '#3661aa';
@@ -20,7 +20,9 @@
     </head>
     <body>
         <div class='fighter_box'>
-            <form action='/Fighter/insert' method='post'>
+            <form action='/Fighter/update' method='post'>
+            <input id='id' name='id' type="hidden" value=<?= $FighterID ?>>
+
                 <div class='class_info'>
                     <img id='classImage' src='<?= $Fighter->class::$picURL ?>' height='100px' width='100px'>
                     <div class="description" id="classDescription">
@@ -31,7 +33,7 @@
                 <h4>Class</h4>
                 <h5><?= $Fighter->class ?>
                 <h4>Name</h4>
-                <input class="form-control" name='name' type='text' value=<?=$Fighter->name?> required>
+                <input class="form-control" name='name' type='text' value=<?= htmlspecialchars($Fighter->name) ?> required>
                 <br>
                 <br>
                 <div class='fighter_info'>
