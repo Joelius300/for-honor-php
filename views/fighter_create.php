@@ -42,7 +42,7 @@
                 </div>
                 <br>
                 <h4>Class</h4>
-                <select class="form-control" id="classSelect" onchange="onSelectChanged()" value=0>
+                <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();" value=0>
                     <?php Fighter::GetOptionsHTML(); ?>
                 </select>  
                 <h4>Name</h4>
@@ -59,5 +59,7 @@
                 <input type="submit" value="Create Fighter" class="btn btn-primary">
             </form>
         </div>
+
+        <script>onSelectChanged();</script>
     </body>
 </html>

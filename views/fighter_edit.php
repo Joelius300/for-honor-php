@@ -1,30 +1,37 @@
-<?php  
+<?php 
     require_once('../views/header.php'); 
-    require_once('../lib/select.php'); 
+    require_once('../lib/selectBar.php'); 
 
-    $strength = new select('strength', 10, $fighter->strength);
-    $health = new select('health', 10, $fighter->health);
+    require_once("../Fighter/fighter.php");
+    require_once("../Fighter/assassin.php");
+    require_once("../Fighter/tank.php");
+    require_once("../Fighter/warrior.php");
+
+
+    $strength = new selectBar('strength', 10, 1);
+    $health = new selectBar('health', 10, 1);
 
     $strength->selectedColor = '#770e23';
     $health->selectedColor = '#3661aa';
 ?>
 
 <html>
-    <head></head>
+    <head>
+    </head>
     <body>
         <div class='fighter_box'>
             <form action='/Fighter/insert' method='post'>
                 <div class='class_info'>
-                    <img src='/images/tank.jpg' height='100px' width='100px'>
-                    <div class="description">
-                        <p>Text</p>
+                    <img id='classImage' src='/images/tank.jpg' height='100px' width='100px'>
+                    <div class="description" id="classDescription">
+                        <p><?= $Fighter->class::$Description?></p>
                     </div>
                 </div>
                 <br>
                 <h4>Class</h4>
-                <h5><?=$fighter->class?></h5> 
+                <h5><?= $Fighter->class ?>
                 <h4>Name</h4>
-                <input class="form-control" name='name' type='text' value=<?=$fighter->name?> required>
+                <input class="form-control" name='name' type='text' value=<?=$Fighter->name?> required>
                 <br>
                 <br>
                 <div class='fighter_info'>
@@ -34,8 +41,10 @@
                     <?= $health->display() ?>
                 </div>
 
-                <input type="submit" value="Save changes" class="btn btn-primary">
+                <input type="submit" value="Create Fighter" class="btn btn-primary">
             </form>
         </div>
+
+        <script>onSelectChanged();</script>
     </body>
 </html>

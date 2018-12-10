@@ -28,16 +28,24 @@ class UserController
     }
 
     public function Create(){
-        $view = new View('user_create');
-        $view->title = 'Benutzer erstellen';
-        $view->display();
+        if(isset($_SESSION['userID'])){
+            header('Location: /');
+        }else{
+            $view = new View('user_create');
+            $view->title = 'Benutzer erstellen';
+            $view->display();
+        }
     }
 
     public function Login(){
-        $view = new View('login');
-        $view->title = 'Login';
-        $view->username = '';
-        $view->display();
+        if(isset($_SESSION['userID'])){
+            header('Location: /');
+        }else{
+            $view = new View('login');
+            $view->title = 'Login';
+            $view->username = '';
+            $view->display();
+        }
     }
 
     public function Logout(){

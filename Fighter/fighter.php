@@ -42,7 +42,7 @@ abstract class Fighter{
     public static $healthMultiplier = 25;
     public static $strengthMultiplier = 10;
 
-
+    public $name;
     public $health;
     public $strength;
 

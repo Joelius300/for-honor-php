@@ -13,11 +13,12 @@ class Tank extends Fighter{
     public static $Description;
 
 
-    public function __construct(){
+    public function __construct($name){
         $this->health = Tank::$BaseHealth;
         $this->strength = Tank::$BaseStrength;
 
         $this->class = 'Tank';
+        $this->name = $name;
     }
 
     

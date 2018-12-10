@@ -12,11 +12,12 @@ class Assassin extends Fighter{
 
     public static $Description;
 
-    public function __construct(){
+    public function __construct($name){
         $this->health = Assassin::$BaseHealth;
         $this->strength = Assassin::$BaseStrength;
 
         $this->class = 'Assassin';
+        $this->name = $name;
     }
 
 

@@ -85,6 +85,17 @@ class UserRepository extends Repository
         }
     }
 
+    public function updateFighterID($userID, $fighterID){
+        $query = "UPDATE $this->tableName set `Fighter_ID` = ? where `id` = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('si', $fighterID, $userID); //bindet die Variablen zu den Parametern
+        
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
+
     public function userExists($username){
         $query = "SELECT * FROM {$this->tableName} WHERE username=?";
 
