@@ -23,7 +23,7 @@ class FighterController{
     {
         $view = new View('fighter_create');
         $view->title = 'Kämpfer erstellen';
-        $view->avaiablePoints = $userRepos->getAvaiablePoints($_SESSION['userID']);
+        $view->avaiablePoints = $this->userRepos->getAvaiablePoints($_SESSION['userID']);
         $view->display();
     }
 
@@ -31,13 +31,13 @@ class FighterController{
     {
         $view = new View('fighter_edit');
         $view->title = 'Kämpfer bearbeiten';
-        $view->avaiablePoints = $userRepos->getAvaiablePoints($_SESSION['userID']);
-        $view->fighter = GetFighter($userRepos->readById($_SESSION['userID'])->Fighter_ID);
+        $view->avaiablePoints = $this->userRepos->getAvaiablePoints($_SESSION['userID']);
+        $view->fighter = GetFighter($this->userRepos->readById($_SESSION['userID'])->Fighter_ID);
         $view->display();
     }
 
     public function GetFighter($id){
-        $result = $fighterRepos->readById($id);        
+        $result = $this->fighterRepos->readById($id);        
         $class = Fighter::ResolveClass($result->Class);
 
         $fighter = new $class();
