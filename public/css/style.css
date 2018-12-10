@@ -18,10 +18,13 @@ body {
     margin-left: 50px;
 }
 
+.form-control{
+    width: 25% !important;
+    font-size: 18px !important;
+}
 
-/*
-this breaks stuff
+
+/* this breaks stuff
 .fighter_info {
     position: absolute;
-}
-*/
+} */

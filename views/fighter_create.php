@@ -7,6 +7,11 @@
 
     $strength->selectedColor = '#770e23';
     $health->selectedColor = '#3661aa';
+
+    // /images/assassin.jpg
+    // /images/tank.jpg
+    // /images/warrior.jpg
+
 ?>
 
 
@@ -17,13 +22,20 @@
         <div class='fighter_box'>
             <form action='/Fighter/insert' method='post'>
                 <div class='class_info'>
-                    <img src='/images/assassin.jpg' height='100px' width='100px'>
+                    <img src='/images/tank.jpg' height='100px' width='100px'>
                     <div class="description">
                         <p>Text</p>
                     </div>
                 </div>
+                <br>
+                <h4>Class</h4>
+                <select class="form-control">
+                    <option>Tank</option>
+                    <option>Assassin</option>
+                    <option>Warrior</option>
+                </select>  
                 <h4>Name</h4>
-                <input name='name' type='text' placeholder='Name' required>
+                <input class="form-control" name='name' type='text' placeholder='Name' required>
                 <br>
                 <br>
                 <div class='fighter_info'>
@@ -33,7 +45,7 @@
                     <?= $health->display() ?>
                 </div>
 
-                <input type="submit" value="Erstellen">
+                <input type="submit" value="Erstellen" class="btn btn-primary">
             </form>
         </div>
     </body>
