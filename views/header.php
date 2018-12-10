@@ -1,3 +1,5 @@
+<?php require_once('../lib/SessionHeader.php'); ?>
+
 <!DOCTYPE html>
 <html lang="de">
   <head>

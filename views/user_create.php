@@ -1,4 +1,4 @@
-<form data-toggle="validator" class="form-horizontal" action="/user/create" method="post">
+<form data-toggle="validator" class="form-horizontal" action="/user/Register" method="post">
 	<div class="component" data-html="true">
 		<div class="form-group">
 		  <label class="col-md-2 control-label" for="textinput">Benutzername</label>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /*
  * Die index.php Datei ist der Einstiegspunkt des MVC. Hier werden zuerst alle

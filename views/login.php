@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="/user/login" method="post">
+<form class="form-horizontal" action="/user/doLogin" method="post">
 	<div class="component" data-html="true">
 		<div class="form-group">
 		  <label class="col-md-2 control-label" for="textinput">Benutzername</label>
@@ -20,3 +20,4 @@
 		</div>
 	</div>
 </form>
+<a href="/User/Create">Registrieren</a>

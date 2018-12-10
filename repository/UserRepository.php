@@ -19,11 +19,10 @@ class UserRepository extends Repository
      */
     public function insert($username, $password)
     {
-        if(!userExists($username)){
+        if(!$this->userExists($username)){
 
             $options = array(
-                'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-                'cost' => 12,
+                'cost' => 12
             );
 
             $password = password_hash($password, PASSWORD_BCRYPT, $options);
@@ -99,6 +98,10 @@ class UserRepository extends Repository
 
         // Resultat der Abfrage holen
         $result = $statement->get_result();
+
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
 
         if ($result->num_rows > 0) {
             return true;

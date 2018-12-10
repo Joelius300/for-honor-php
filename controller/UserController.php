@@ -20,17 +20,17 @@ class UserController
 
     public function Register()
     {
-        $view = new View('user_create');
-        $view->title = 'Benutzer erstellen';
-        $view->display();
-    }
-
-    public function Create(){
-        if($this->repos->create($_POST['username'], $_POST['password']) > 0){
+        if($this->repos->insert($_POST['username'], $_POST['password']) > 0){
             header('Location: /user/Login');
         }else{
             header('Location: /user/Create');
         }
+    }
+
+    public function Create(){
+        $view = new View('user_create');
+        $view->title = 'Benutzer erstellen';
+        $view->display();
     }
 
     public function Login(){
@@ -40,13 +40,19 @@ class UserController
         $view->display();
     }
 
+    public function Logout(){
+        unset($_SESSION['userID']);
+        session_destroy();
+
+        header('Location: /user/Login');
+    }
+
     public function doLogin(){
         try{
             $user = $this->repos->readByUsername($_POST['username']);
-
-            if(password_verify($_POST['password'], $user['Password'])){
-                session_start();
-                $_SESSION['userID'] = $user['id'];
+            
+            if(password_verify($_POST['password'], $user->Password)){
+                $_SESSION['userID'] = $user->id;
 
                 header('Location: /');
             }else{

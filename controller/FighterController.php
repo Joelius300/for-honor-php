@@ -29,10 +29,12 @@ class FighterController{
 
     public function Edit()
     {
+        $loggedUser = $this->userRepos->readById($_SESSION['userID']);
+
         $view = new View('fighter_edit');
         $view->title = 'Kämpfer bearbeiten';
-        $view->avaiablePoints = $this->userRepos->getAvaiablePoints($_SESSION['userID']);
-        $view->fighter = GetFighter($this->userRepos->readById($_SESSION['userID'])->Fighter_ID);
+        $view->avaiablePoints = $this->userRepos->getAvaiablePoints($loggedUser->id);
+        $view->fighter = $this->GetFighter($loggedUser->Fighter_ID);
         $view->display();
     }
 
