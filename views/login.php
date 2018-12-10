@@ -21,7 +21,7 @@
 		<div class="col center">
 		  <input id="submit" name="submit" type="submit" class="btn btn-primary">
 		</div>
-		<a class="center" href="/User/Create">Registrieren</a>
+		<a class="center" href="/User/Create">create an account</a>
 	</div>
 </form>
 
