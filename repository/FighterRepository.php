@@ -29,4 +29,16 @@ class FighterRepository extends Repository
 
         return $statement->insert_id;
     }
+
+    public function update($id, $name, $healthpoints, $strengthpoints)
+    {
+        $query = "UPDATE $this->tableName set `Name` = ?, set `Healthpoints` = ?, set `Strengthpoints` = ? where `id` = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('siii', $name, $healthpoints, $strengthpoints, $id); //bindet die Variablen zu den Parametern
+        
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
 }

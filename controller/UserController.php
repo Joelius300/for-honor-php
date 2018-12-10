@@ -14,43 +14,46 @@ class UserController
 
     public function index()
     {
-        //Anfrage an die URI /user/crate weiterleiten (HTTP 302)
-        header('Location: /user/showLogin');
+        //Anfrage weiterleiten (HTTP 302)
+        header('Location: /user/Login');
     }
 
-    public function showCreate()
+    public function Register()
     {
         $view = new View('user_create');
         $view->title = 'Benutzer erstellen';
         $view->display();
     }
 
-    public function create(){
-        $this->repos->create($_POST['username'], $_POST['password']); 
-        header('Location: /user/showLogin');
+    public function Create(){
+        if($this->repos->create($_POST['username'], $_POST['password']) > 0){
+            header('Location: /user/Login');
+        }else{
+            header('Location: /user/Create');
+        }
     }
 
-    public function showLogin(){
+    public function Login(){
         $view = new View('login');
         $view->title = 'Login';
         $view->username = '';
         $view->display();
     }
 
-    public function login(){
-        $user = $this->repos->readByUsername($_POST['username']);
+    public function doLogin(){
+        try{
+            $user = $this->repos->readByUsername($_POST['username']);
 
-        if(password_verify($_POST['password'], $user['Password'])){
-            session_start();
-            $_SESSION['loggedIn'] = true;
-            $_SESSION['userID'] = $user['id'];
+            if(password_verify($_POST['password'], $user['Password'])){
+                session_start();
+                $_SESSION['userID'] = $user['id'];
 
-            header('Location: /');
-        }else{
-            $view = new View('login');
-            $view->title = 'Login';
-            $view->username = $_POST['username'];
-            $view->display();
-        }
+                header('Location: /');
+            }else{
+                header('Location: /user/Login');
+            }
+        }catch (Exception $e) {
+            header('Location: /user/Login');
+    }
     }
 }

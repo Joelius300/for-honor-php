@@ -38,6 +38,9 @@
             <li><a href="/Fight">Fight</a></li>
             <li><a href="/Fighter/Create">Debug: Fighter Create</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/User/Logout">Logout</a></li>
+        </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

@@ -19,26 +19,28 @@ class UserRepository extends Repository
      */
     public function insert($username, $password)
     {
-        //$salt = 'oü9ggih8dfaw4';
-        //$password = hash('sha256', ($password . $salt));
+        if(!userExists($username)){
 
-        $options = array(
-            'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-            'cost' => 12,
-          );
+            $options = array(
+                'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+                'cost' => 12,
+            );
 
-        $password = password_hash($password, PASSWORD_BCRYPT, $options);
+            $password = password_hash($password, PASSWORD_BCRYPT, $options);
 
-        $query = "INSERT INTO $this->tableName (`Username`, `Password`) VALUES (?, ?)";
+            $query = "INSERT INTO $this->tableName (`Username`, `Password`) VALUES (?, ?)";
 
-        $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ss', $username, $password); //bindet die beiden Variablen als zwei Strings (ss) zu den Parametern
-        
-        if (!$statement->execute()) {
-            throw new Exception($statement->error);
+            $statement = ConnectionHandler::getConnection()->prepare($query);
+            $statement->bind_param('ss', $username, $password); //bindet die beiden Variablen als zwei Strings (ss) zu den Parametern
+            
+            if (!$statement->execute()) {
+                throw new Exception($statement->error);
+            }
+
+            return $statement->insert_id;
+        }else{
+            return -5;
         }
-
-        return $statement->insert_id;
     }
 
     public function readByUsername($username){
@@ -67,5 +69,41 @@ class UserRepository extends Repository
 
         // Den gefundenen Datensatz zurückgeben
         return $row;
+    }
+
+    public function getAvaiablePoints($id){
+        return $this->readById($id)->Points;
+    }
+
+    public function updateAvaiablePoints($id, $points){
+        $query = "UPDATE $this->tableName set `Points` = ? where `id` = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('si', $points, $id); //bindet die Variablen zu den Parametern
+        
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
+
+    public function userExists($username){
+        $query = "SELECT * FROM {$this->tableName} WHERE username=?";
+
+        // Datenbankverbindung anfordern und, das Query "preparen" (vorbereiten)
+        // und die Parameter "binden"
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('s', $username);
+
+        // Das Statement absetzen
+        $statement->execute();
+
+        // Resultat der Abfrage holen
+        $result = $statement->get_result();
+
+        if ($result->num_rows > 0) {
+            return true;
+        }else{
+            return false;
+        }
     }
 }

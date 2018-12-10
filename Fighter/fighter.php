@@ -6,14 +6,13 @@ require_once 'warrior.php';
 
 abstract class Fighter{
     private static $ClassesNames = array(0 => 'Tank', 1 => 'Assassin', 2 => 'Warrior');
-    private static $ClassesIDs = array('Tank' => 0, 'Assassin' => 1, 'Warrior' => 2);
 
     public static function ResolveClass($idOrName){        
         try{
             return $ClassesNames[$idOrName];
         }catch (Exception $e) {
             try{
-                return $ClassesIDs[$idOrName];
+                return array_search ($ClassesNames, $idOrName);
             }catch (Exception $e) {
                 return 'Unable to resolve class';
             }
