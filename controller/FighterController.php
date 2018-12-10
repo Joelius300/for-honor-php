@@ -31,7 +31,20 @@ class FighterController{
         $view = new View('fighter_edit');
         $view->title = 'Kämpfer bearbeiten';
         $view->avaiablePoints = $userRepos->getAvaiablePoints($_SESSION['userID']);
+        $view->fighter = GetFighter($userRepos->readById($_SESSION['userID'])->Fighter_ID);
         $view->display();
+    }
+
+    public function GetFighter($id){
+        $result = $fighterRepos->readById($id);        
+        $class = Fighter::ResolveClass($result->Class);
+
+        $fighter = new $class();
+
+        $fighter->health = $result->HealthPoints;
+        $fighter->strength = $result->StrengthPoints;
+
+        return $fighter;
     }
 
     public function insert(){
@@ -40,7 +53,7 @@ class FighterController{
     }
 
     public function update(){
-        $this->fighterRepos->update($_POST['id'], $_POST['name'], $_POST['class'], $_POST['strengthValue'], $_POST['healthValue']); 
+        $this->fighterRepos->update($_POST['id'], $_POST['name'], $_POST['strengthValue'], $_POST['healthValue']); 
         header('Location: /');
     }
 }
