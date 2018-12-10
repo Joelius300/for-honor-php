@@ -13,7 +13,8 @@ body {
 .fighter_box {
     padding: 20px;
     margin: 100px auto;
-    background-color: lightgray;
+    background-color: rgb(75, 73, 73);
+    opacity: 0.95;
     height: 600px;
 }
 
@@ -27,20 +28,31 @@ body {
 }
 
 .form-control{
-    width: 200px !important;
+    width: 250px !important;
     font-size: 18px !important;
 }
 
 .form-horizontal{
-    margin: 0 25%;
-    padding: 10%;
-    background-color: grey;
-    opacity: 0.9;
-    height: 100%;
+    margin: 25px 30%;
+    padding: 100px;
+    background-color: rgb(73, 73, 73);
+    opacity: 0.95;
 }
 
-.{
+.center{
+    display: block;
+    margin: 10 auto;
+    text-align: center;
+}
 
+select, option{
+    background-color: #2e302f  !important;
+    color: #d5d5d5 !important;
+}
+
+.login-pic{
+    display: block;
+    margin: 25px auto;
 }
 
 /* this breaks stuff
