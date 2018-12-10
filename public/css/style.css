@@ -55,6 +55,10 @@ select, option{
     margin: 25px auto;
 }
 
+.help-block{
+    color: lightgrey;
+}
+
 /* this breaks stuff
 .fighter_info {
     position: absolute;
