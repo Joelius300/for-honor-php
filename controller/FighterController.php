@@ -80,6 +80,8 @@ class FighterController{
 
         $fighter = new $class($result->Name);
 
+        $fighter->id = $result->id;
+
         if(isset($result->userID) && !empty($result->userID) && isset($result->username) && !empty($result->username)) {
             $fighter->userID = $result->userID;
             $fighter->username = $result->username;

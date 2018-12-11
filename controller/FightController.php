@@ -17,5 +17,9 @@ class FightController{
         $view->title = 'Wähle einen Gegner';
         $view->display();
     }
+
+    // public function Fight(){
+    //     die($_GET['enemy']);
+    // }
 }
 ?>
