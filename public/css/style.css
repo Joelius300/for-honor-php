@@ -112,4 +112,37 @@ select, option{
     text-align: center;
     background-color: #2e302f;
     border: 3px solid black;
+    font-size: 15px;
+}
+
+.fighterListContainer{
+    margin-top: 50px;
+}
+
+.fighterListContainer a{
+    display: block;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.fighterListContainer a:active, .fighterListContainer a:focus{
+    text-decoration: none;
+}
+
+.fighterListContainer a:hover{
+    text-decoration: none;
+    /* INSERT BOXSHADOW ETC HERE */
+}
+
+.panel{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.panel span{
+    padding: 0 5px;
+}
+
+.username{
+    float:right;
 }

@@ -15,7 +15,18 @@
 	<?php else: ?>
 		<?php foreach ($fighters as $fighter): ?>
 			<div class="panel panel-default">
-				<div class="panel-heading" onclick="window.location.href = '/Fight/Fight?enemy=<?= $fighter->id ?>';"><span class='name'><?= htmlspecialchars($fighter->name); ?></span> - <span class='class'><?= $fighter->class; ?></span>  |  User: <span class='username'><?= $fighter->username; ?></span></div>
+				<a class="panel-heading" 
+					href = '/Fight/Fight?enemy=<?= $fighter->id ?>'>
+					<span class='class'>
+						<img id='classImage' src='<?= $fighter->class::$picURL; ?>' height='30px' width='30px'>
+					</span>
+					<span class='name'>
+						<?= htmlspecialchars($fighter->name); ?>
+					</span>
+					<span class='username'>
+						<?= $fighter->username; ?>
+					</span>
+				</a>
 			</div>
 		<?php endforeach ?>
 	<?php endif ?>
