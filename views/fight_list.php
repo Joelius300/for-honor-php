@@ -16,10 +16,10 @@
 					<span class='class'>
 						<img id='classImage' src='<?= $fighter->class::$picURL; ?>' height='30px' width='30px'>
 					</span>
-					<span class='name'>
+					<span class='name padding'>
 						<?= htmlspecialchars($fighter->name); ?>
 					</span>
-					<span class='username'>
+					<span class='username padding'>
 						<?= $fighter->username; ?>
 					</span>
 				</a>

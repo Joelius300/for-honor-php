@@ -139,7 +139,7 @@ select, option{
     margin: 0 auto;
 }
 
-.panel span{
+span.padding{
     padding: 0 5px;
 }
 

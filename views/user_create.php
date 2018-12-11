@@ -3,28 +3,28 @@
 		<img class="login-pic" src="/images/main-symbol.jpg" width="200px" height="200px">
 		<div>
 			<div class="center">
-				<label class="control-label" for="textinput">Benutzername</label>
+				<label class="control-label" for="textinput">Username</label>
 			</div>
 		  <div class="center">
-		  	<input id="username" name="username" type="text" class="form-control input-md center" maxlength='30' placeholder='Benutzername' required>
+		  	<input id="username" name="username" type="text" class="form-control input-md center" maxlength='30' placeholder='username' required>
 		  </div>
 		</div>
 
 		<div>
 			<div class="center">
-				<label class="control-label" for="textinput">Passwort</label>
+				<label class="control-label" for="textinput">Password</label>
 			</div>
     	<div class="center">
-        <input name='password' type="password" data-minlength="6" class="form-control center" id="inputPassword" placeholder="Passwort" required>
+        <input name='password' type="password" data-minlength="6" class="form-control center" id="inputPassword" placeholder="password" required>
         <div class="help-block">Minimum of 6 characters</div>
-				<input type="password" class="form-control center" id="inputPasswordConfirm" data-match="#inputPassword" placeholder="Password bestätigen" required>
+				<input type="password" class="form-control center" id="inputPasswordConfirm" data-match="#inputPassword" placeholder="confirm password" required>
       </div>
     </div>
 
 		<div>
 	      <label class="control-label" for="textinput">&nbsp;</label>
 		  <div class="center">
-		    <input id="submit" name="submit" type="submit" class="btn btn-primary">
+		    <input id="submit" name="submit" value="Sign up" type="submit" class="btn btn-primary">
 			</div>
 			<a class="center" href="/User/login">login</a>
 		</div>

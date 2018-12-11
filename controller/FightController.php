@@ -17,16 +17,14 @@ class FightController{
     {
         $view = new View('fight_list');
         $view->title = 'Wähle einen Gegner';
-        $view->fighters = $this->controller->GetAll(0, 5000);
+        $view->fighters = $this->fighterController->GetAll(0, 5000);
         $view->display();
     }
 
-    public function Fight(){
-        $enemy = $this->fighterController->GetFighter($_GET['enemy']);
-        $youself = $this->fighterController->GetFighter($_SESSION['fighterID']);
-
-        
-    }
+    // public function Fight(){
+    //     $enemy = $this->fighterController->GetFighter($_GET['enemy']);
+    //     $youself = $this->fighterController->GetFighter($_SESSION['fighterID']);        
+    // }
 
 }
 ?>
