@@ -33,7 +33,7 @@
                 <h4>Class</h4>
                 <h5><?= $Fighter->class ?>
                 <h4>Name</h4>
-                <input class="form-control" name='name' type='text' value=<?= htmlspecialchars($Fighter->name) ?> required>
+                <input class="form-control" name='name' type='text' value=<?= htmlspecialchars($Fighter->name) ?> maxLength='30' required>
                 <br>
                 <br>
                 <div class='fighter_info'>
@@ -46,7 +46,5 @@
                 <input type="submit" value="Save" class="btn btn-primary">
             </form>
         </div>
-
-        <script>onSelectChanged();</script>
     </body>
 </html>

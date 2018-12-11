@@ -60,14 +60,14 @@ class FighterController{
     }
 
     public function insert(){
-        $insert_id = $this->fighterRepos->insert($_POST['name'], $_POST['class'], $_POST['strengthValue'], $_POST['healthValue']); 
+        $insert_id = $this->fighterRepos->insert($_POST['name'], $_POST['class'], $_POST['healthValue'], $_POST['strengthValue']); 
         
         $this->userRepos->updateFighterID($_SESSION['userID'], $insert_id);
         header('Location: /');
     }
 
     public function update(){
-        $this->fighterRepos->update($_POST['id'], $_POST['name'], $_POST['strengthValue'], $_POST['healthValue']); 
+        $this->fighterRepos->update($_POST['id'], $_POST['name'], $_POST['healthValue'], $_POST['strengthValue']); 
         header('Location: /');
     }
 }

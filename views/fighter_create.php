@@ -46,7 +46,7 @@
                     <?php Fighter::GetOptionsHTML(); ?>
                 </select>  
                 <h4>Name</h4>
-                <input class="form-control" name='name' type='text' placeholder='Name' required>
+                <input class="form-control" name='name' type='text' placeholder='Name' maxLength='30' required>
                 <br>
                 <br>
                 <div class='fighter_info'>
