@@ -69,10 +69,21 @@ class FighterController{
         if(empty($result) || !isset($result)){
             header('Location: /Fighter/Create');
         }
-        
+
+        $fighter = GetFighterFromRow($result);
+
+        return $fighter;
+    }
+
+    private function GetFighterFromRow($result){              
         $class = Fighter::ResolveClass($result->Class);
 
         $fighter = new $class($result->Name);
+
+        if(isset($result->userID) && !empty($result->userID) && isset($result->username) && !empty($result->username)) {
+            $fighter->userID = $result->userID;
+            $fighter->username = $result->username;
+        }
 
         $fighter->health = $result->HealthPoints;
         $fighter->strength = $result->StrengthPoints;
@@ -160,5 +171,16 @@ class FighterController{
         }
         return true;
     } 
+
+
+    public function GetAll($start, $count){
+        $rows = $this->fighterRepos->readAllJoin($start, $count);
+        $fighters = array();
+        for($i = 0; $i < count($rows); $i++){
+            $fighters[$i] = $this->GetFighterFromRow($rows[$i]);
+        }
+
+        return $fighters;
+    }
 }
 ?>

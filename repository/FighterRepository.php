@@ -41,4 +41,27 @@ class FighterRepository extends Repository
             throw new Exception($statement->error);
         }
     }
+
+    public function readAllJoin($start = 0, $amount = 100)
+    {
+        $query = 
+        "SELECT `fighter`.*, `user`.`id` as `userID`, `user`.`Username` as `username` FROM fighter inner join `user` on `fighter`.id = `user`.Fighter_ID 
+        LIMIT $start, $amount";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+
+        // Datensätze aus dem Resultat holen und in das Array $rows speichern
+        $rows = array();
+        while ($row = $result->fetch_object()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
 }

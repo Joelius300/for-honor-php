@@ -1,25 +1,22 @@
-<?php require_once('../views/header.php'); ?>
-
-<?php
+<?php 
+	require_once('../views/header.php'); 
+	
 	require_once("../controller/FighterController.php");
+	$controller = new FighterController();
+
+	$fighters = $controller->GetAll(0, 5000)
 ?>
 
-<!-- <article class="hreview open special"> -->
+<div class="fighterListContainer">
 	<?php if (empty($fighters)): ?>
-		<div> <!-- <div class="dhd"> -->
+		<div class="dhd">
 			<h2 class="item title">Keine fighter gefunden.</h2>
 		</div>
 	<?php else: ?>
 		<?php foreach ($fighters as $fighter): ?>
 			<div class="panel panel-default">
-				<div class="panel-heading"><?= $fighter->class;?> <?= $fighter->lastName;?></div>
-				<div class="panel-body">
-					<p class="description">
-						In der Datenbank existiert ein fighter mit dem Namen <?= $fighter->firstName;?> <?= $fighter->lastName;?>. 
-						Dieser hat die EMail-Adresse: <a href="mailto:<?= $fighter->email;?>"><?= $fighter->email;?></a>
-					</p>
-				</div>
+				<div class="panel-heading"><span class='name'><?= htmlspecialchars($fighter->name); ?></span> - <span class='class'><?= $fighter->class; ?></span>  |  User: <span class='username'><?= $fighter->username; ?></span></div>
 			</div>
 		<?php endforeach ?>
 	<?php endif ?>
-<!-- </article> -->
+</div>
