@@ -18,6 +18,8 @@ class FightController{
 
     public function index()
     {
+        $_SESSION['isAbleToFight'] = true;
+
         $view = new View('fight_list');
         $view->title = 'Wähle einen Gegner';
         $view->fighters = $this->fighterController->GetAll(0, 5000);
@@ -25,13 +27,19 @@ class FightController{
     }
 
     public function Fight(){
-        $enemy = $this->fighterController->GetFighter($_GET['enemy']);
-        $yourself = $this->fighterController->GetFighter($_SESSION['fighterID']);
+        if($_SESSION['isAbleToFight']){
+            $_SESSION['isAbleToFight'] = false;
 
-        $enemy->CalcFightValues();
-        $yourself->CalcFightValues();
+            $enemy = $this->fighterController->GetFighter($_GET['enemy']);
+            $yourself = $this->fighterController->GetFighter($_SESSION['fighterID']);
 
-        $this->doFight($yourself, $enemy);
+            $enemy->CalcFightValues();
+            $yourself->CalcFightValues();
+
+            $this->doFight($yourself, $enemy);
+        }else{
+            header('Location: /');
+        }
     }
 
     private function doFight($yourself, $enemy){

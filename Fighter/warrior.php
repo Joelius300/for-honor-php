@@ -44,8 +44,10 @@ class Warrior extends Fighter{
         }
         
         if($this->calcHealth < 1){
+            $this->calcHealth = 0;
             $winner = $enemy;
         }else if($enemy->calcHealth < 1){
+            $enemy->calcHealth = 0;
             $winner = $this;
         }
 

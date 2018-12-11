@@ -56,6 +56,16 @@ class UserController
         $view->display();
     }
 
+    private function LoginWithError($error){
+        unset($_SESSION['userID']);
+        unset($_SESSION['fighterID']);
+        $view = new View('login');
+        $view->title = 'Login';
+        $view->username = '';
+        $view->error = $error;
+        $view->display();
+    }
+
     public function Create(){
         if(isset($_SESSION['userID'])){
             header('Location: /');
@@ -79,6 +89,8 @@ class UserController
 
     public function Logout(){
         unset($_SESSION['userID']);
+        unset($_SESSION['fighterID']);
+        unset($_SESSION['isAbleToFight']);
         session_destroy();
 
         header('Location: /user/Login');
@@ -96,24 +108,14 @@ class UserController
                 $_SESSION['userID'] = $user->id;
                 $_SESSION['fighterID'] = $user->Fighter_ID;
 
+                $_SESSION['isAbleToFight'] = true;
+
                 header('Location: /');
             }else{                
-                unset($_SESSION['userID']);
-                unset($_SESSION['fighterID']);
-                $view = new View('login');
-                $view->title = 'Login';
-                $view->username = '';
-                $view->error = 'Wrong Username or Password';
-                $view->display();
+                $this->LoginWithError('Wrong Username or Password');
             }
         }catch (Exception $e) {
-            unset($_SESSION['userID']);
-            unset($_SESSION['fighterID']);
-            $view = new View('login');
-            $view->title = 'Login';
-            $view->username = '';
-            $view->error = 'Wrong Username or Password';
-            $view->display();
+            $this->LoginWithError('Wrong Username or Password');
         }   
     }
 }
