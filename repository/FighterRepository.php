@@ -44,8 +44,11 @@ class FighterRepository extends Repository
 
     public function readAllJoin($start = 0, $amount = 100)
     {
+        $loggedUserID = $_SESSION['userID'];
+
         $query = 
         "SELECT `fighter`.*, `user`.`id` as `userID`, `user`.`Username` as `username` FROM fighter inner join `user` on `fighter`.id = `user`.Fighter_ID 
+        where `user`.`id` <> $loggedUserID 
         LIMIT $start, $amount";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);

@@ -10,6 +10,7 @@ class Tank extends Fighter{
     public static $BaseStrength = 4;
 
     public static $BlockChance = 30;
+    
     public static $picURL = "/images/tank.jpg";
     public static $Description;
 
@@ -25,23 +26,31 @@ class Tank extends Fighter{
     
 
     public function Attack($enemy){
-        $blocked;
-        $countered;
+        $blocked = false;
+        $countered = false;
         $doubled = false;
         
+        $winner = null;
+
         switch($enemy->class){
             case 'Tank':
-                $blocked = AttackTank($enemy);
+                $blocked = $this->AttackTank($enemy);
                 break;
             case 'Assassin':
-                $countered = AttackAssassin($enemy);
+                $countered = $this->AttackAssassin($enemy);
                 break;
             case 'Warrior':
-                AttackWarrior($enemy);
+                $this->AttackWarrior($enemy);
                 break;
         }
 
-        return new Round($this, $enemy, $blocked, $countered, $doubled);
+        if($this->calcHealth < 1){
+            $winner = $enemy;
+        }else if($enemy->calcHealth < 1){
+            $winner = $this;
+        }
+
+        return new Round($this, $enemy, $blocked, $countered, $doubled, $winner);
     }
 
     private function AttackTank($enemy){

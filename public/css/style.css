@@ -119,7 +119,7 @@ select, option{
     margin-top: 50px;
 }
 
-.fighterListContainer a{
+.fighterListContainer a, .fighterListContainer div{
     display: block;
     font-size: 20px;
     text-decoration: none;

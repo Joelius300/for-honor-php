@@ -9,6 +9,7 @@ class Assassin extends Fighter{
     public static $BaseStrength = 7;
 
     public static $CounterChance = 20;
+    
     public static $picURL = "/images/assassin.jpg";
     public static $Description;
 
@@ -22,23 +23,31 @@ class Assassin extends Fighter{
 
 
     public function Attack($enemy, $interruptable = true){
-        $blocked;
-        $countered;
+        $blocked = false;
+        $countered = false;
         $doubled = false;
+
+        $winner = null;
 
         switch($enemy->class){
             case 'Tank':
-                $blocked = AttackTank($enemy, $interruptable);
+                $blocked = $this->AttackTank($enemy, $interruptable);
                 break;
             case 'Assassin':
-                $countered = AttackAssassin($enemy, $interruptable);
+                $countered = $this->AttackAssassin($enemy, $interruptable);
                 break;
             case 'Warrior':
-                AttackWarrior($enemy);
+                $this->AttackWarrior($enemy);
                 break;
         }
 
-        return new Round($this, $enemy, $blocked, $countered, $doubled);
+        if($this->calcHealth < 1){
+            $winner = $enemy;
+        }else if($enemy->calcHealth < 1){
+            $winner = $this;
+        }
+
+        return new Round($this, $enemy, $blocked, $countered, $doubled, $winner);
     }
 
     private function AttackTank($enemy, $interruptable){

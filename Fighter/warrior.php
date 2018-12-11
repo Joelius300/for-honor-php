@@ -9,6 +9,7 @@ class Warrior extends Fighter{
     public static $BaseStrength = 5;
 
     public static $DoubleHitChance = 50;
+    
     public static $picURL = "/images/warrior.jpg";
     public static $Description;
 
@@ -23,24 +24,32 @@ class Warrior extends Fighter{
     private $lastDoubled;
 
     public function Attack($enemy){
-        $blocked;
-        $countered;
+        $blocked = false;
+        $countered = false;
 
         $this->lastDoubled = false;
 
+        $winner = null;
+
         switch($enemy->class){
             case 'Tank':
-                $blocked = AttackTank($enemy, false, true);
+                $blocked = $this->AttackTank($enemy, false, true);
                 break;
             case 'Assassin':
-                $countered = AttackAssassin($enemy, false, true);
+                $countered = $this->AttackAssassin($enemy, false, true);
                 break;
             case 'Warrior':
-                AttackWarrior($enemy, false);
+            $this->AttackWarrior($enemy, false);
                 break;
         }
+        
+        if($this->calcHealth < 1){
+            $winner = $enemy;
+        }else if($enemy->calcHealth < 1){
+            $winner = $this;
+        }
 
-        return new Round($this, $enemy, $blocked, $countered, $this->lastDoubled);
+        return new Round($this, $enemy, $blocked, $countered, $this->lastDoubled, $winner);
     }
 
     private function AttackTank($enemy, $second, $interruptable){
