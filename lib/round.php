@@ -39,18 +39,18 @@ class Round{
     }
 
     public function output(){
-        echo "<span class='AttackerName'>" . $this->attackerName . "</span> attacked <span class='DefenderName'>" . $this->defenderName . "</span> for <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage.<br>";
+        echo "<span class='AttackerName'>" . $this->attackerName . "</span> <img src='/images/attack.png' width='25px' height='25px'> <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage <img src='/images/attack.png' width='25px' height='25px'> <span class='Damage'> <span class='DefenderName'>" . $this->defenderName . "</span> <br>";
         if($this->defenderBlocked){
-            echo "<span class='DefenderName'>" . $this->defenderName . "</span> blocked the hit and didn't take damage.<br>";
+            echo "<span class='DefenderName'>" . $this->defenderName . "</span> <img src='/images/tank.jpg' width='25px' height='25px'> the hit and didn't take damage.<br>";
         }else if($this->defenderCountered){
             echo "<span class='DefenderName'>" . $this->defenderName . "</span> countered the hit and didn't take damage. He returned the favour with <span class='Damage'>" . $this->defenderCalcStrength . "</span> damage himself.<br>";
         }else if($this->attackerDoubled){
-            echo "He was fast and attacked once more doing <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage.<br>";
+            echo "He knocked his enemies defense down and attacked once more doing <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage again.<br>";
         }
 
-        echo "\n\r";
-        echo "Health " . $this->defenderName . ": " . $this->defenderCalcHealth . " hp<br>";
-        echo "Health " . $this->attackerName . ": " . $this->attackerCalcHealth . " hp<br>";
+        echo "<br>";
+        echo "Health <span class='DefenderName'>" . $this->defenderName . "</span>: <span class='Health'>" . $this->defenderCalcHealth . "</span> hp<br>";
+        echo "Health <span class='AttackerName'>" . $this->attackerName . "</span>: <span class='Health'>" . $this->attackerCalcHealth . "</span> hp<br>";
 
         if(!empty($this->winner)){
             echo "<br>";
@@ -60,7 +60,8 @@ class Round{
 
 
     private static function callWinner($winner){
-        echo "<span class='WinnerName'>$winner->name</span> hat gewonnen!";
+        echo "<img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'><span class='WinnerName'>$winner->name</span><img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'>";
+
     }
 }
 
