@@ -4,8 +4,9 @@ body {
     height: 100%;
     background-image: url("/images/background.jpg");
     background-position: center;
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 
     color: white !important;
 }
@@ -64,7 +65,51 @@ select, option{
     color: lightgrey;
 }
 
-/* this breaks stuff
-.fighter_info {
-    position: absolute;
-} */
+#home{
+    display: flex;
+    padding: 25px;
+    margin: 0 auto;
+}
+
+#fight{
+    display: block;
+    width:900px;
+    height: 750px;
+    margin: 10px 20px;
+    background-color: lime;
+}
+
+#player_stats{
+    display: block;
+    width: 400px;
+    height: 400px;
+}
+
+#fighter_info{
+    display: block;
+    height: 350px;
+    width: 400px;
+}
+
+#fighter_pic{
+    display: block;
+    height: 350px;
+    width: 350px;
+    margin: 10px auto;
+}
+
+.stat_block{
+    text-align: center;
+    background-color: #2e302f;
+    border: 5px solid black;
+    padding: 10px;
+    margin: 10px 20px;
+}
+
+.player_stats{
+    margin: 15px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #2e302f;
+    border: 3px solid black;
+}
