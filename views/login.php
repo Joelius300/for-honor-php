@@ -6,7 +6,7 @@
 				<label class="control-label" for="username">Benutzername</label>
 			</div>
 		  <div class="center">
-		  	<input id="username" name="username" type="text" class="form-control input-md center" value=<?= $username ?? ''?>>
+		  	<input id="username" name="username" type="text" maxLength='30' class="form-control input-md center" value=<?= $username ?? ''?>>
 		  </div>
 		</div>
 		<div>

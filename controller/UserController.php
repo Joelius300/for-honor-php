@@ -22,15 +22,38 @@ class UserController
 
     public function Register()
     {
-        if($this->repos->insert($_POST['username'], $_POST['password']) > 0){
-            $this->LoginUser($_POST['username'], $_POST['password']);
+        if(!$this->ValidateCredentials($_POST['username'], $_POST['password'])){
+            return;
         }else{
-            unset($_SESSION['userID']);
-            $view = new View('user_create');
-            $view->title = 'Benutzer erstellen';
-            $view->error = 'User already exists';
-            $view->display();
+
+            if($this->repos->insert($_POST['username'], $_POST['password']) > 0){
+                $this->LoginUser($_POST['username'], $_POST['password']);
+            }else{
+                $this->CreateWithError('User already exists');
+            }
         }
+    }
+
+    private function ValidateCredentials($username, $password){
+        if(strlen($username) > 30 || strlen($username) < 1 || empty($username)){
+            $this->CreateWithError('Username must contain between 1 and 30 chars (incl.).');
+            return false;
+        }
+
+        if(strlen($password) < 6 || empty($password)){
+            $this->CreateWithError('Password must contain at least 6 chars.');
+            return false;
+        }
+
+        return true;
+    }
+    
+    private function CreateWithError($error){
+        unset($_SESSION['userID']);
+        $view = new View('user_create');
+        $view->title = 'Benutzer erstellen';
+        $view->error = $error;
+        $view->display();
     }
 
     public function Create(){
