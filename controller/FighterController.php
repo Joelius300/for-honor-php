@@ -70,7 +70,7 @@ class FighterController{
             header('Location: /Fighter/Create');
         }
 
-        $fighter = GetFighterFromRow($result);
+        $fighter = $this->GetFighterFromRow($result);
 
         return $fighter;
     }
