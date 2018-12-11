@@ -1,10 +1,6 @@
 <?php 
 	require_once('../views/header.php'); 
 	
-	require_once("../controller/FighterController.php");
-	$controller = new FighterController();
-
-	$fighters = $controller->GetAll(0, 5000)
 ?>
 
 <div class="fighterListContainer">

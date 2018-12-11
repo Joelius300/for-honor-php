@@ -20,50 +20,69 @@ class Warrior extends Fighter{
         $this->name = $name;
     }
 
+    private $lastDoubled;
 
     public function Attack($enemy){
+        $blocked;
+        $countered;
+
+        $this->lastDoubled = false;
+
         switch($enemy->class){
             case 'Tank':
-                AttackTank($enemy, false);
+                $blocked = AttackTank($enemy, false, true);
                 break;
             case 'Assassin':
-                AttackAssassin($enemy, false);
+                $countered = AttackAssassin($enemy, false, true);
                 break;
             case 'Warrior':
                 AttackWarrior($enemy, false);
                 break;
         }
+
+        return new Round($this, $enemy, $blocked, $countered, $this->lastDoubled);
     }
 
-    private function AttackTank($enemy, $second){
-        if(rand(1, 100) <= Tank::$BlockChance){
-            return;
+    private function AttackTank($enemy, $second, $interruptable){
+        if($interruptable && rand(1, 100) <= Tank::$BlockChance){
+            return true;
         }else{
-            $enemy->health -= $this->strength;
+            $enemy->calcHealth -= $this->calcStrength;
 
             if(!$second && rand(1, 100) <= Warrior::$DoubleHitChance){
-                $this->AttackTank($enemy, true);
+                $this->AttackTank($enemy, true, false);
+
+                $this->lastDoubled = true;
             }
+
+            return false;
         }
     }
 
-    private function AttackAssassin($enemy, $second){
-        if(rand(1, 100) <= Assassin::$CounterChance){
-            $enemy->Attack($this);
+    private function AttackAssassin($enemy, $second, $interruptable){
+        if($interruptable && rand(1, 100) <= Assassin::$CounterChance){
+            $enemy->Attack($this, false);
+            return true;
         }else{
-            $enemy->health -= $this->strength;
+            $enemy->calcHealth -= $this->calcStrength;
 
             if(!$second && rand(1, 100) <= Warrior::$DoubleHitChance){
-                $this->AttackAssassin($enemy, true);
+                $this->AttackAssassin($enemy, true, false);
+
+                $this->lastDoubled = true;
             }
+
+            return false;
         }
     }
     
     private function AttackWarrior($enemy, $second){
-        $enemy->health -= $this->strength;
+        $enemy->calcHealth -= $this->calcStrength;
 
         if(!$second && rand(1, 100) <= Warrior::$DoubleHitChance){
             $this->AttackWarrior($enemy, true);
+            
+            $this->lastDoubled = true;
         }
     }
 }

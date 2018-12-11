@@ -21,38 +21,47 @@ class Assassin extends Fighter{
     }
 
 
-    public function Attack($enemy){
+    public function Attack($enemy, $interruptable = true){
+        $blocked;
+        $countered;
+        $doubled = false;
+
         switch($enemy->class){
             case 'Tank':
-                AttackTank($enemy);
+                $blocked = AttackTank($enemy, $interruptable);
                 break;
             case 'Assassin':
-                AttackAssassin($enemy);
+                $countered = AttackAssassin($enemy, $interruptable);
                 break;
             case 'Warrior':
                 AttackWarrior($enemy);
                 break;
         }
+
+        return new Round($this, $enemy, $blocked, $countered, $doubled);
     }
 
-    private function AttackTank($enemy){
-        if(rand(1, 100) <= Tank::$BlockChance){
-            return;
+    private function AttackTank($enemy, $interruptable){
+        if($interruptable && rand(1, 100) <= Tank::$BlockChance){
+            return true;
         }else{
-            $enemy->health -= $this->strength;
+            $enemy->calcHealth -= $this->calcStrength;
+            return false;
         }
     }
 
-    private function AttackAssassin($enemy){
-        if(rand(1, 100) <= Assassin::$CounterChance){
-            $enemy->Attack($this);
+    private function AttackAssassin($enemy, $interruptable){
+        if($interruptable && rand(1, 100) <= Assassin::$CounterChance){
+            $enemy->Attack($this, false);
+            return true;
         }else{
-            $enemy->health -= $this->strength;
+            $enemy->calcHealth -= $this->calcStrength;
+            return false;
         }
     }
     
     private function AttackWarrior($enemy){
-        $enemy->health -= $this->strength;
+        $enemy->calcHealth -= $this->calcStrength;
     }
 }
 

@@ -94,10 +94,12 @@ class UserController
             
             if(!empty($user) && password_verify($password, $user->Password)){
                 $_SESSION['userID'] = $user->id;
+                $_SESSION['fighterID'] = $user->Fighter_ID;
 
                 header('Location: /');
             }else{                
                 unset($_SESSION['userID']);
+                unset($_SESSION['fighterID']);
                 $view = new View('login');
                 $view->title = 'Login';
                 $view->username = '';
@@ -106,6 +108,7 @@ class UserController
             }
         }catch (Exception $e) {
             unset($_SESSION['userID']);
+            unset($_SESSION['fighterID']);
             $view = new View('login');
             $view->title = 'Login';
             $view->username = '';

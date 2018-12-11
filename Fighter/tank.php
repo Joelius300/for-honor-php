@@ -3,6 +3,7 @@
 require_once 'fighter.php';
 require_once 'assassin.php';
 require_once 'warrior.php';
+require_once '../lib/round.php';
 
 class Tank extends Fighter{
     public static $BaseHealth = 7;
@@ -24,37 +25,46 @@ class Tank extends Fighter{
     
 
     public function Attack($enemy){
+        $blocked;
+        $countered;
+        $doubled = false;
+        
         switch($enemy->class){
             case 'Tank':
-                AttackTank($enemy);
+                $blocked = AttackTank($enemy);
                 break;
             case 'Assassin':
-                AttackAssassin($enemy);
+                $countered = AttackAssassin($enemy);
                 break;
             case 'Warrior':
                 AttackWarrior($enemy);
                 break;
         }
+
+        return new Round($this, $enemy, $blocked, $countered, $doubled);
     }
 
     private function AttackTank($enemy){
         if(rand(1, 100) <= Tank::$BlockChance){
-            return;
+            return true;
         }else{
-            $enemy->health -= $this->strength;
+            $enemy->calcHealth -= $this->calcStrength;
+            return false;
         }
     }
 
     private function AttackAssassin($enemy){
         if(rand(1, 100) <= Assassin::$CounterChance){
-            $enemy->Attack($this);
+            $enemy->Attack($this, false);
+            return true;
         }else{
-            $enemy->health -= $this->strength;
+            $enemy->calcHealth -= $this->calcStrength;
+            return false;
         }
     }
     
     private function AttackWarrior($enemy){
-        $enemy->health -= $this->strength;
+        $enemy->calcHealth -= $this->calcStrength;
     }
 }
 

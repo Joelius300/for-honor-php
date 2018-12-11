@@ -1,25 +1,32 @@
 <?php
 
-// require_once('../repository/FighterRepository.php');
+//require_once('../repository/FighterRepository.php');
 require_once("../lib/View.php");
-
+require_once("../controller/FighterController.php");
+	
 
 class FightController{
-    private $repos;
+    private $fighterController;
 
     public function __construct(){
-        // $this->repos = new FighterRepository();
+        //$this->fighterRepos = new FighterRepository();
+        $this->fighterController = new FighterController();
     }
 
     public function index()
     {
         $view = new View('fight_list');
         $view->title = 'Wähle einen Gegner';
+        $view->fighters = $this->controller->GetAll(0, 5000);
         $view->display();
     }
 
-    // public function Fight(){
-    //     die($_GET['enemy']);
-    // }
+    public function Fight(){
+        $enemy = $this->fighterController->GetFighter($_GET['enemy']);
+        $youself = $this->fighterController->GetFighter($_SESSION['fighterID']);
+
+        
+    }
+
 }
 ?>

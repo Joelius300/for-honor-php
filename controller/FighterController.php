@@ -103,6 +103,7 @@ class FighterController{
             $insert_id = $this->fighterRepos->insert($_POST['name'], $_POST['class'], $_POST['healthValue'], $_POST['strengthValue']); 
             
             $this->userRepos->updateFighterID($_SESSION['userID'], $insert_id);
+            $_SESSION['fighterID'] = $insert_id;
             header('Location: /');
         }catch(Exception $e){
             $this->CreateWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');

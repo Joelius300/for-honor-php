@@ -43,6 +43,11 @@ abstract class Fighter{
         }
     }
 
+    public function CalcFightValues(){
+        $this->calcHealth = $this->health * self::$healthMultiplier;
+        $this->calcStrength = $this->strength * self::$strengthMultiplier;
+    }
+
     public static $healthMultiplier = 25;
     public static $strengthMultiplier = 10;
 
@@ -51,6 +56,9 @@ abstract class Fighter{
     public $name;
     public $health;
     public $strength;
+
+    public $calcHealth;
+    public $calcStrength;
     
     public $userID;
     public $username;
