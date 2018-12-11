@@ -26,12 +26,13 @@
                 <div class='class_info'>
                     <img id='classImage' src='<?= $Fighter->class::$picURL ?>' height='100px' width='100px'>
                     <div class="description" id="classDescription">
+                        <h4>Class</h4>
+                        <h5><?= $Fighter->class ?></h5>
                         <p><?= $Fighter->class::$Description ?></p>
                     </div>
                 </div>
                 <br>
-                <h4>Class</h4>
-                <h5><?= $Fighter->class ?>
+                
                 <h4>Name</h4>
                 <input class="form-control" name='name' type='text' value=<?= htmlspecialchars($Fighter->name) ?> maxLength='30' required>
                 <br>

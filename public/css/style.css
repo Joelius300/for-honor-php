@@ -7,7 +7,7 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
 
-    color: white;
+    color: white !important;
 }
 
 .fighter_box {
@@ -23,8 +23,13 @@ body {
     padding-bottom: 10px;
 }
 
+.class_select{
+    margin: 0 0 25px 50px;
+}
+
 .description {
     margin-left: 50px;
+    max-width: 300;
 }
 
 .form-control{

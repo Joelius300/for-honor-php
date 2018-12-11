@@ -36,15 +36,20 @@
             <form action='/Fighter/insert' method='post'>
                 <div class='class_info'>
                     <img id='classImage' src='/images/tank.jpg' height='100px' width='100px'>
-                    <div class="description" id="classDescription">
-                        <p>Text</p>
+                    <div>
+                        <div class="class_select">
+                            <h4>Class</h4>
+                            <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();" value=0>
+                                <?php Fighter::GetOptionsHTML(); ?>
+                            </select>
+                        </div>
+                        <div class="description" id="classDescription">
+                            <p>Text</p>
+                        </div>
                     </div>
                 </div>
                 <br>
-                <h4>Class</h4>
-                <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();" value=0>
-                    <?php Fighter::GetOptionsHTML(); ?>
-                </select>  
+                
                 <h4>Name</h4>
                 <input class="form-control" name='name' type='text' placeholder='Name' maxLength='30' required>
                 <br>
