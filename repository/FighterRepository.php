@@ -44,6 +44,10 @@ class FighterRepository extends Repository
 
     public function readAllJoin($start = 0, $amount = 100)
     {
+        if(!isset($_SESSION['userID'])){
+            header('Location: /user/Login');
+        }
+        
         $loggedUserID = $_SESSION['userID'];
 
         $query = 

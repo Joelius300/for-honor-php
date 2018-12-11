@@ -25,10 +25,14 @@ class FighterController{
 
     public function Create()
     {
-        $view = new View('fighter_create');
-        $view->title = 'Kämpfer erstellen';
-        $view->avaiablePoints = $this->userRepos->getAvaiablePoints($_SESSION['userID']);
-        $view->display();
+        if(!isset($_SESSION['fighterID'])){
+            $view = new View('fighter_create');
+            $view->title = 'Kämpfer erstellen';
+            $view->avaiablePoints = $this->userRepos->getAvaiablePoints($_SESSION['userID']);
+            $view->display();
+        }else{
+            header('Location: /Fighter/Edit');
+        }
     }
 
     public function CreateWithError($error){
@@ -41,14 +45,18 @@ class FighterController{
 
     public function Edit()
     {
-        $loggedUser = $this->userRepos->readById($_SESSION['userID']);
+        if(isset($_SESSION['fighterID'])){
+            $loggedUser = $this->userRepos->readById($_SESSION['userID']);
 
-        $view = new View('fighter_edit');
-        $view->title = 'Kämpfer bearbeiten';
-        $view->avaiablePoints = $this->userRepos->getAvaiablePoints($loggedUser->id);
-        $view->Fighter = $this->GetFighter($loggedUser->Fighter_ID);
-        $view->FighterID = $loggedUser->Fighter_ID;
-        $view->display();
+            $view = new View('fighter_edit');
+            $view->title = 'Kämpfer bearbeiten';
+            $view->avaiablePoints = $this->userRepos->getAvaiablePoints($loggedUser->id);
+            $view->Fighter = $this->GetFighter($_SESSION['fighterID']);
+            $view->FighterID = $_SESSION['fighterID'];
+            $view->display();
+        }else{
+            header('Location: /Fighter/Create');
+        }
     }
 
     public function EditWithError($error)
@@ -95,6 +103,7 @@ class FighterController{
 
     public function insert(){
         if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], 'Create') || !$this->ValidateClass($_POST['class'], 'Create')){
+            // Erorrs already displayed in Validation itself (more specific error)
             // $this->CreateWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
             return;
         }
@@ -112,6 +121,7 @@ class FighterController{
 
     public function update(){
         if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], 'Edit')){
+            // Erorrs already displayed in Validation itself (more specific error)
             // $this->EditWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
             return;
         }
@@ -149,6 +159,7 @@ class FighterController{
 
     private function ValidateClass($class, $NameOfAction){
         //Apparently this isn't actually working since the select automatically selects index 0 when you would get an invalid index (not an option for the select)
+        //But it would in case it is needed
         if($class < 0 || $class > Fighter::GetAmountClasses() -1 || !isset($class)){
             $action = $NameOfAction.'WithError';
             $this->$action('You cannot manipulate the class');

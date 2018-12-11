@@ -85,15 +85,55 @@ class UserRepository extends Repository
         }
     }
 
-    public function updateFighterID($userID, $fighterID){
-        $query = "UPDATE $this->tableName set `Fighter_ID` = ? where `id` = ?";
+    public function updateStats($userID, $totalGames, $wins){
+        $query = "UPDATE $this->tableName set `TotalGames` = ?, `Wins` = ? where `id` = ?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('si', $fighterID, $userID); //bindet die Variablen zu den Parametern
+        $statement->bind_param('iii', $totalGames, $wins, $userID); //bindet die Variablen zu den Parametern
         
         if (!$statement->execute()) {
             throw new Exception($statement->error);
         }
+    }
+
+    public function updateFighterID($userID, $fighterID){
+        $query = "UPDATE $this->tableName set `Fighter_ID` = ? where `id` = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('ii', $fighterID, $userID); //bindet die Variablen zu den Parametern
+        
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
+
+    public function getUserIDfromFighterID($fighterID){
+        $query = "SELECT `id` FROM {$this->tableName} 
+        WHERE `Fighter_ID` = ?";
+
+        // Datenbankverbindung anfordern und, das Query "preparen" (vorbereiten)
+        // und die Parameter "binden"
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $fighterID);
+
+        // Das Statement absetzen
+        $statement->execute();
+
+        // Resultat der Abfrage holen
+        $result = $statement->get_result();
+
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+
+        // Ersten Datensatz aus dem Reultat holen
+        $row = $result->fetch_object();
+
+        // Datenbankressourcen wieder freigeben
+        $result->close();
+
+        // Den gefundenen Datensatz zurückgeben
+        return $row->id;
     }
 
     public function userExists($username){

@@ -4,16 +4,19 @@
 require_once("../lib/View.php");
 require_once("../lib/round.php");
 require_once("../controller/FighterController.php");
+require_once("../repository/UserRepository.php");
 	
 
 class FightController{
     private $fighterController;
+    private $userRepos;
 
     private $yourTurn;
 
     public function __construct(){
         //$this->fighterRepos = new FighterRepository();
         $this->fighterController = new FighterController();
+        $this->userRepos = new UserRepository();
     }
 
     public function index()
@@ -58,15 +61,24 @@ class FightController{
             }
         }
 
-        $this->EndGame($rounds, $winner);
+        $this->EndGame($rounds, $winner, $yourself->id, $enemy->id);
     }
 
-    private function EndGame($rounds, $winner){
+    private function EndGame($rounds, $winner, $yourFighterID, $enemyFighterID){   
+        $youWon = $winner->id == $yourFighterID;
+        
+        $this->UpdateUserStats($_SESSION['userID'], 1, $youWon);
+        $this->UpdateUserStats($this->userRepos->getUserIDfromFighterID($enemyFighterID), 1, !$youWon);
+        
         $view = new View('fight_result');
         $view->title = 'Resultat';
         $view->rounds = $rounds;
         $view->winner = $winner;
         $view->display();
+    }
+
+    private function UpdateUserStats($userID, $totalGamesDelta, $youWon){
+
     }
 
     private function PlayRound($yourself, $enemy){
