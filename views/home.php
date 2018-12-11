@@ -25,7 +25,7 @@
                 
             </div>
             <div id="fighter_info">
-                <a href="/Fighter"><img id="fighter_pic" src="/images/tank.jpg" alt="much edit such fighter"></a>
+                <a href="/Fighter"><img id="fighter_pic" src="/images/edit_fighter.png" alt="much edit such fighter"></a>
             </div>
             </div>
         </div>
