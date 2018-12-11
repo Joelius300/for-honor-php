@@ -24,10 +24,12 @@ class UserController
     {
         if($this->repos->insert($_POST['username'], $_POST['password']) > 0){
             $this->LoginUser($_POST['username'], $_POST['password']);
-            unset(UserController::$ERROR);
         }else{
-            UserController::$ERROR = 'User already exists';
-            header('Location: /user/Create');
+            unset($_SESSION['userID']);
+            $view = new View('user_create');
+            $view->title = 'Benutzer erstellen';
+            $view->error = 'User already exists';
+            $view->display();
         }
     }
 
@@ -70,15 +72,22 @@ class UserController
             if(!empty($user) && password_verify($password, $user->Password)){
                 $_SESSION['userID'] = $user->id;
 
-                unset(UserController::$ERROR);
                 header('Location: /');
-            }else{
-                UserController::$ERROR = 'Wrong Username or Password';
-                header('Location: /user/Login');
+            }else{                
+                unset($_SESSION['userID']);
+                $view = new View('login');
+                $view->title = 'Login';
+                $view->username = '';
+                $view->error = 'Wrong Username or Password';
+                $view->display();
             }
         }catch (Exception $e) {
-            UserController::$ERROR = 'Wrong Username or Password';
-            header('Location: /user/Login');
+            unset($_SESSION['userID']);
+            $view = new View('login');
+            $view->title = 'Login';
+            $view->username = '';
+            $view->error = 'Wrong Username or Password';
+            $view->display();
         }   
     }
 }

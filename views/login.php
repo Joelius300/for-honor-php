@@ -26,9 +26,7 @@
 </form>
 
 <?php
-require_once "../controller/UserController.php";
-if(!isset($_SESSION['userID']) && isset(UserController::$ERROR)){
-	$error = UserController::$ERROR;
+if(!isset($_SESSION['userID']) && isset($error)){
 	echo "<script>alert('$error');</script>";
 }
 ?>
