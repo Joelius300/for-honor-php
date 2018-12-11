@@ -18,11 +18,11 @@ class Round{
     
     public function __construct($attacker, $defender, $defenderBlocked = false, $defenderCountered = false, $attackerDoubled = false, $winner = null){
         $this->attackerName = $attacker->name;
-        $this->attackerCalcStrengt = $attacker->calcStrength;
+        $this->attackerCalcStrength = $attacker->calcStrength;
         $this->attackerCalcHealth = $attacker->calcHealth;
 
         $this->defenderName = $defender->name;
-        $this->defenderCalcStrengt = $defender->calcStrength;
+        $this->defenderCalcStrength = $defender->calcStrength;
         $this->defenderCalcHealth = $defender->calcHealth;
 
 
