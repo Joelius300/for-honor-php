@@ -66,5 +66,11 @@
         </div>
 
         <script>onSelectChanged();</script>
+
+        <?php
+            if(isset($error)){
+                echo "<script>alert('$error');</script>";
+            }
+        ?>
     </body>
 </html>

@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `fighter`;
 
 CREATE TABLE `fighter` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
- `Name` varchar(20) NOT NULL,
+ `Name` varchar(30) NOT NULL,
  `Class` int(11) NOT NULL, --0 = Tank, 1 = Assassin, 2 = Warrior
  `HealthPoints` int(11) NOT NULL,
  `StrengthPoints` int(11) NOT NULL,

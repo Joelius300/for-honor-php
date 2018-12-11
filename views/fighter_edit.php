@@ -47,5 +47,11 @@
                 <input type="submit" value="Save" class="btn btn-primary">
             </form>
         </div>
+
+        <?php
+            if(isset($error)){
+                echo "<script>alert('$error');</script>";
+            }
+        ?>
     </body>
 </html>

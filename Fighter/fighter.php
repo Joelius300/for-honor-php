@@ -7,6 +7,10 @@ require_once 'warrior.php';
 abstract class Fighter{
     private static $ClassesNames = array(0 => 'Tank', 1 => 'Assassin', 2 => 'Warrior');
 
+    public static function GetAmountClasses(){
+        return count(self::$ClassesNames);
+    }
+
     public static function ResolveClass($idOrName){        
         try{
             return Fighter::$ClassesNames[$idOrName];
