@@ -49,6 +49,9 @@ abstract class Fighter{
     public $name;
     public $health;
     public $strength;
+    
+    public $userID;
+    public $username;
 
     public $class;
 
