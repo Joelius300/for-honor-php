@@ -4,19 +4,19 @@
 require_once("../lib/View.php");
 require_once("../lib/round.php");
 require_once("../controller/FighterController.php");
-require_once("../repository/UserRepository.php");
+require_once("../controller/UserController.php");
 	
 
 class FightController{
     private $fighterController;
-    private $userRepos;
+    private $userController;
 
     private $yourTurn;
 
     public function __construct(){
         //$this->fighterRepos = new FighterRepository();
         $this->fighterController = new FighterController();
-        $this->userRepos = new UserRepository();
+        $this->userController = new UserController();
     }
 
     public function index()
@@ -61,14 +61,13 @@ class FightController{
             }
         }
 
-        $this->EndGame($rounds, $winner, $yourself->id, $enemy->id);
+        $this->EndGame($rounds, $winner, $yourself->id);
     }
 
-    private function EndGame($rounds, $winner, $yourFighterID, $enemyFighterID){   
+    private function EndGame($rounds, $winner, $yourFighterID){   
         $youWon = $winner->id == $yourFighterID;
-        
+
         $this->UpdateUserStats($_SESSION['userID'], 1, $youWon);
-        $this->UpdateUserStats($this->userRepos->getUserIDfromFighterID($enemyFighterID), 1, !$youWon);
         
         $view = new View('fight_result');
         $view->title = 'Resultat';
@@ -78,7 +77,11 @@ class FightController{
     }
 
     private function UpdateUserStats($userID, $totalGamesDelta, $youWon){
+        $stats = $this->userController->GetStats($userID);
+        $totalGames = $stats['TotalGames'] + $totalGamesDelta;
+        $wins = $stats['Wins'] + ($youWon ? 1 : 0);
 
+        $this->userController->UpdateStats($userID, $totalGames, $wins);
     }
 
     private function PlayRound($yourself, $enemy){

@@ -1,4 +1,5 @@
 <?php
+require_once("../controller/UserController.php");
 
 /**
  * Der Controller ist der Ort an dem es für jede Seite, welche der Benutzer
@@ -32,6 +33,12 @@ class DefaultController
      * beschrieben.
      */
 
+    private $userController;
+
+    public function __construct(){
+        $this->userController = new UserController();
+    }
+
     public function index()
     {
         // In diesem Fall möchten wir dem Benutzer die View mit dem Namen
@@ -41,6 +48,12 @@ class DefaultController
 
         $view = new View('home');
         $view->title = 'Home';
+
+        //The Session Header activates inside of the View so it has to be catched here as well but no action is required. 
+        if(isset($_SESSION['userID'])){
+            $view->stats = $this->userController->GetStats($_SESSION['userID']);
+        }
+
         $view->display();
     }
 }

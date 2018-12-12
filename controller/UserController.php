@@ -20,6 +20,20 @@ class UserController
         header('Location: /user/Login');
     }
 
+    public function GetStats($userID){
+        $user = $this->repos->readById($userID);
+        $stats = array();
+
+        $stats['TotalGames'] = $user->TotalGames;
+        $stats['Wins'] = $user->Wins;
+
+        return $stats;
+    }
+
+    public function UpdateStats($userID, $totalGames, $wins){
+        $this->repos->updateStats($userID, $totalGames, $wins);
+    }
+
     public function Register()
     {
         if(!$this->ValidateCredentials($_POST['username'], $_POST['password'])){

@@ -13,13 +13,20 @@
                 </div>
                 <div class="stat_block">
                     <div class="player_stats">
-                        Games
+                        Games: <?= $stats['TotalGames'] ?>
                     </div>
                     <div class="player_stats">
-                        Wins
+                        Wins: <?= $stats['Wins'] ?>
                     </div>
                     <div class="player_stats">
-                        Win Ratio
+                        Win Ratio: <?php
+                            if($stats['TotalGames'] > 0){
+                                echo ($stats['Wins'] / $stats['TotalGames']);
+                            }else{
+                                echo '0';
+                            }
+                        
+                        ?>
                     </div>
                 </div>
                 
