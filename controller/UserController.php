@@ -24,8 +24,10 @@ class UserController
         $user = $this->repos->readById($userID);
         $stats = array();
 
+        $stats['Name'] = $user->Username;
         $stats['TotalGames'] = $user->TotalGames;
         $stats['Wins'] = $user->Wins;
+        $stats['Losses'] = intval($user->TotalGames) - intval($user->Wins);
 
         return $stats;
     }

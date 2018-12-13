@@ -38,7 +38,6 @@
             <!-- <li><a href="/Home">Home</a></li> -->
             <li><a href="/Fighter">Fighter</a></li>
             <li><a href="/Fight">Fight</a></li>
-            <li><a href="/Fighter/Create">Debug: Fighter Create</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/User/Logout">Logout</a></li>

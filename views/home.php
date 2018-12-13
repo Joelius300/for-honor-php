@@ -9,7 +9,7 @@
             <div>
             <div id="player_stats">
                 <div class="stat_block">
-                    Playername
+                    <span class="DisplayName"><?= $stats['Name'] ?></span>
                 </div>
                 <div class="stat_block">
                     <div class="player_stats">
@@ -21,9 +21,9 @@
                     <div class="player_stats">
                         Win Ratio: <?php
                             if($stats['TotalGames'] > 0){
-                                echo ($stats['Wins'] / $stats['TotalGames']);
+                                echo number_format((($stats['Wins'] / $stats['TotalGames']) * 100), 2, '.', '') . '%';
                             }else{
-                                echo '0';
+                                echo '0%';
                             }
                         
                         ?>

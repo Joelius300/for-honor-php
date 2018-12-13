@@ -145,3 +145,7 @@ span.padding{
 .username{
     float:right;
 }
+
+.DisplayName{
+    font-weight: bold;
+}
