@@ -134,4 +134,13 @@ class UserController
             $this->LoginWithError('Wrong Username or Password');
         }   
     }
+
+
+    public function Delete(){
+        if(isset($_SESSION['userID']) && !empty($_SESSION['userID'])){
+            $this->repos->deleteById($_SESSION['userID']);
+        }else{
+            $this->Logout();
+        }
+    }
 }
