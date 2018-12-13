@@ -196,5 +196,16 @@ class FighterController{
 
         return $fighters;
     }
+
+
+    public function Delete(){
+        if(isset($_SESSION['fighterID']) && !empty($_SESSION['fighterID'])){
+            $this->fighterRepos->deleteById($_SESSION['fighterID']);
+
+            unset($_SESSION['fighterID']);
+
+            header('Location: /');
+        }
+    }
 }
 ?>

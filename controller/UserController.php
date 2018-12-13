@@ -1,6 +1,7 @@
 <?php
 
 require_once('../repository/UserRepository.php');
+require_once('../repository/FighterRepository.php');
 require_once("../lib/View.php");
 
 
@@ -9,9 +10,11 @@ class UserController
     public static $ERROR;
 
     private $repos;
+    private $fighterRepos;
 
     public function __construct(){
         $this->repos = new UserRepository();
+        $this->fighterRepos = new FighterRepository();
     }
 
     public function index()
@@ -139,6 +142,12 @@ class UserController
     public function Delete(){
         if(isset($_SESSION['userID']) && !empty($_SESSION['userID'])){
             $this->repos->deleteById($_SESSION['userID']);
+            
+            if(isset($_SESSION['fighterID']) && !empty($_SESSION['fighterID'])){
+                $this->fighterRepos->deleteById($_SESSION['fighterID']);
+            }
+
+            $this->Logout();
         }else{
             $this->Logout();
         }

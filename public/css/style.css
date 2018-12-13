@@ -149,3 +149,18 @@ span.padding{
 .DisplayName{
     font-weight: bold;
 }
+
+a.button{
+    display: block;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+a.button:active, a.button:focus{
+    text-decoration: none;
+}
+
+a.button:hover{
+    text-decoration: none;
+    /* INSERT BOXSHADOW ETC HERE */
+}

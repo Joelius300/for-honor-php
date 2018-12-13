@@ -46,6 +46,7 @@
 
                 <input type="submit" value="Save" class="btn btn-primary">
             </form>
+            <a href="/Fighter/Delete">Löschen</a>
         </div>
 
         <?php

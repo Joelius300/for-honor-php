@@ -6,3 +6,4 @@ try{
 }catch (Exception $e){
     header('Location: /user/Login');
 }
+?>

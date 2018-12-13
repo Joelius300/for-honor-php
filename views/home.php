@@ -28,6 +28,8 @@
                         
                         ?>
                     </div>
+
+                    <a class="button" href="/User/Delete">Delete User</a>
                 </div>
                 
             </div>
