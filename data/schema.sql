@@ -19,7 +19,7 @@ CREATE TABLE `user` (
  `Fighter_ID` int(11) DEFAULT NULL,
  `Wins` int(11) NOT NULL DEFAULT '0',
  `TotalGames` int(11) NOT NULL DEFAULT '0',
- `Points` int(11) NOT NULL DEFAULT '0',
+ `Points` int(11) NOT NULL DEFAULT '3',
  PRIMARY KEY (`id`),
   FOREIGN KEY (`Fighter_ID`) 
   REFERENCES `fighter`(`id`) ON DELETE SET NULL ON UPDATE CASCADE

@@ -24,11 +24,7 @@
 
             var switcher = new ClassSwitcher(defaults);
 
-            function onSelectChanged(){
-                switcher.Refresh();
-                Refresh('strength', '<?= $strength->selectedColor ?? '' ?>');
-                Refresh('health', '<?= $health->selectedColor ?? '' ?>');
-            }
+            SelectBarContainer.avaiablePoints = <?= $avaiablePoints ?>;
         </script>
     </head>
     <body>
@@ -39,7 +35,7 @@
                     <div>
                         <div class="class_select">
                             <h4>Class</h4>
-                            <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();" value=0>
+                            <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();" value='0'>
                                 <?php Fighter::GetOptionsHTML(); ?>
                             </select>
                         </div>
@@ -65,7 +61,19 @@
             </form>
         </div>
 
-        <script>onSelectChanged();</script>
+        <script>
+            function onSelectChanged(){
+                switcher.Refresh();
+
+                selectBarstrength.Refresh();
+                selectBarhealth.Refresh();
+            }
+
+            SelectBarContainer.selects = [selectBarstrength, selectBarhealth];
+            SelectBarContainer.CheckAvaiablePoints();
+
+            onSelectChanged();
+        </script>
 
         <?php
             if(isset($error)){

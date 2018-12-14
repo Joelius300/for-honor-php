@@ -7,12 +7,17 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
 
+
 <!-- Custom styles for this template -->
 <link href="/css/style.css?v=<?=time();?>" rel="stylesheet" type="text/css">
 
 <!-- selects (this v=... is only for testing purposes! it prevents the browser from caching the css-->
 <link href="/css/select.css?v=<?=time();?>" rel="stylesheet" type="text/css">
 <script src="/js/select.js?v=<?=time();?>"></script> 
+<script src="/js/SelectBarContainer.js?v=<?=time();?>"></script>     
+<script src="/js/SelectBar.js?v=<?=time();?>"></script>     
+
+
 
 <?php
 

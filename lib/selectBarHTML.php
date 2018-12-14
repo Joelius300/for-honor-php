@@ -1,9 +1,9 @@
 <body>
     <div class='selectContainer'>
-        <input id='<?= $name ?>Value' name='<?= $name ?>Value' type="hidden" value=<?=$startValue?>>
+        <input id='<?= $name ?>Value' name='<?= $name ?>Value' type="hidden" value='<?=$startValue?>'>
 
         <div class='select'>
-            <div class='selectButton' onclick="ChangeValue('<?= $name ?>', -1, '<?= $selectedColor ?? '' ?>')">-</div>
+            <div id="<?= $name ?>Minus" class='selectButton <?= $name ?>Minus' onclick="selectBar<?= $name ?>.ChangeValue(-1)">-</div>
             
             <?php
             for($i = 0; $i < $itemsAmount; $i++){
@@ -13,11 +13,13 @@
             }
             ?>
 
-            <div class='selectButton' onclick="ChangeValue('<?= $name ?>', +1, '<?= $selectedColor ?? '' ?>')">+</div>
+            <div id="<?= $name ?>Plus" class='selectButton <?= $name ?>Plus' onclick="selectBar<?= $name ?>.ChangeValue(+1)">+</div>
         </div>
 
     </div>
 
-    <script>Refresh('<?= $name ?>', '<?= $selectedColor ?? '' ?>')</script>
-
+    <script>
+        var selectBar<?= $name ?> = new SelectBar('<?= $name ?>', '<?= $selectedColor ?? '' ?>');
+        selectBar<?= $name ?>.Refresh();
+    </script>
 </body>
