@@ -67,7 +67,7 @@
 
         <?php
             if(isset($error)){
-                echo "<script>alert('$error');</script>";
+                echo "<script>alert('". htmlspecialchars($error) ."');</script>";
             }
         ?>
     </body>

@@ -1,9 +1,10 @@
 class ClassSwitcher {
-    constructor(defaults) {
-      this.defaults = defaults;
+    constructor(defaults, avaiablePoints) {
+        this.defaults = defaults;
+        this.avaiablePoints = avaiablePoints;
     }
 
-    Refresh(){
+    Refresh() {
         var select = document.getElementById('classSelect');
         var value = select.options[select.selectedIndex].value;
 
@@ -13,6 +14,8 @@ class ClassSwitcher {
         document.getElementById('strengthValue').value = classDefaults.baseStrength;
         document.getElementById('classDescription').innerText = classDefaults.description; //.replace("/\n/g", "\\n");
         document.getElementById('classImage').src = classDefaults.picURL;
-    }
-  }
 
+        SelectBarContainer.avaiablePoints = this.avaiablePoints;
+        SelectBarContainer.CheckAvaiablePoints();
+    }
+}

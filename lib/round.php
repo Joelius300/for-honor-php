@@ -60,8 +60,7 @@ class Round{
 
 
     private static function callWinner($winner){
-        echo "<img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'><span class='WinnerName'>$winner->name</span><img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'>";
-
+        echo "<img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'><span class='WinnerName'>" . htmlspecialchars($winner->name) . "</span><img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'>";
     }
 }
 

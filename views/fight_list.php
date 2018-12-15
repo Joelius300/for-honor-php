@@ -20,7 +20,7 @@
 						<?= htmlspecialchars($fighter->name); ?>
 					</span>
 					<span class='username padding'>
-						<?= $fighter->username; ?>
+						<?= htmlspecialchars($fighter->username); ?>
 					</span>
 				</a>
 			</div>

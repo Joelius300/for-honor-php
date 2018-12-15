@@ -9,7 +9,7 @@
             <div>
             <div id="player_stats">
                 <div class="stat_block">
-                    <span class="DisplayName"><?= $stats['Name'] ?></span>
+                    <span class="DisplayName"><?= htmlspecialchars($stats['Name']) ?></span>
                 </div>
                 <div class="stat_block">
                     <div class="player_stats">

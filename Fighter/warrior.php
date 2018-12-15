@@ -8,7 +8,7 @@ class Warrior extends Fighter{
     public static $BaseHealth = 6;
     public static $BaseStrength = 5;
 
-    public static $DoubleHitChance = 50;
+    public static $DoubleHitChance = 40;
     
     public static $picURL = "/images/warrior.jpg";
     public static $Description;

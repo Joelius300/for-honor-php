@@ -1,7 +1,7 @@
 class SelectBarContainer {
     static CheckAvaiablePoints() {
         for (let i = 0; i < SelectBarContainer.selects.length; i++) {
-            SelectBarContainer.selects[i].HidePlus(SelectBarContainer.avaiablePoints <= 0);
+            SelectBarContainer.selects[i].CheckPoints();
         }
     }
 

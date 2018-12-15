@@ -102,7 +102,7 @@ class FighterController{
     }
 
     public function insert(){
-        if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], 'Create') || !$this->ValidateClass($_POST['class'], 'Create')){
+        if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], $_POST['avaiablePoints'], 'Create', $_POST['class'])){
             // Erorrs already displayed in Validation itself (allows for a more specific error)
             // $this->CreateWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
             return;
@@ -123,7 +123,7 @@ class FighterController{
     }
 
     public function update(){
-        if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], 'Edit')){
+        if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], $_POST['avaiablePoints'], 'Edit', null)){
             // Erorrs already displayed in Validation itself (more specific error)
             // $this->EditWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
             return;
@@ -140,14 +140,22 @@ class FighterController{
         }
     }
 
-    private function ValidateEssentials($name, $health, $strength, $NameOfAction){
+    private function ValidateEssentials($name, $health, $strength, $avaiablePoints, $NameOfAction, $class = null){
         if(!$this->ValidateName($name, $NameOfAction)){
             return false;
         }
-        if(!$this->ValidateHealth($health, $NameOfAction)){
+        if($class != null){
+            if(!$this->ValidateClass($class, $NameOfAction)){
+                return false;
+            }
+        }
+        if(!$this->ValidateHealthRange($health, $NameOfAction)){
             return false;
         }
-        if(!$this->ValidateStrength($strength, $NameOfAction)){
+        if(!$this->ValidateStrengthRange($strength, $NameOfAction)){
+            return false;
+        }
+        if(!$this->ValidatePointRelations($health, $strength, $avaiablePoints, $NameOfAction, $class)){
             return false;
         }
 
@@ -165,7 +173,7 @@ class FighterController{
 
     private function ValidateClass($class, $NameOfAction){
         //Apparently this isn't actually working since the select automatically selects index 0 when you would get an invalid index (not an option for the select)
-        //But it would in case it is needed
+        //But it would show an error and prevent the insert if it there was a problem
         if($class < 0 || $class > Fighter::GetAmountClasses() -1 || !isset($class)){
             $action = $NameOfAction.'WithError';
             $this->$action('You cannot manipulate the class');
@@ -174,8 +182,8 @@ class FighterController{
         return true;
     }
 
-    private function ValidateHealth($health, $NameOfAction){
-        if($health < 1 || $health > 10 || !isset($health)){
+    private function ValidateHealthRange($health, $NameOfAction){
+        if($health < 1 || $health > 10 || empty($health)){
             $action = $NameOfAction.'WithError';
             $this->$action('Health can only be between 1 and 10 (incl.).');
             return false;
@@ -183,14 +191,42 @@ class FighterController{
         return true;
     }
 
-    private function ValidateStrength($strength, $NameOfAction){
-        if($strength < 1 || $strength > 10 || !isset($strength)){
+    private function ValidateStrengthRange($strength, $NameOfAction){
+        if($strength < 1 || $strength > 10 || empty($strength)){
             $action = $NameOfAction.'WithError';
             $this->$action('Strength can only be between 1 and 10 (incl.).');
             return false;
         }
         return true;
     } 
+
+    private function ValidatePointRelations($health, $strength, $avaiablePointsNow, $NameOfAction, $class=null){
+        $pointsSpend = $this->userRepos->readByID($_SESSION['userID'])->Points - $avaiablePointsNow;
+        $deltaHealth;
+        $deltaStrength;
+
+        if(!empty($_SESSION['fighterID'])){
+            $fighterThen = $this->fighterRepos->readByID($_SESSION['fighterID']);
+            $deltaHealth = $health - $fighterThen->HealthPoints;
+            $deltaStrength = $strength - $fighterThen->StrengthPoints;
+        }else{
+            if($class == null){
+                $action = $NameOfAction.'WithError';
+                $this->$action('Something went horribly wrong. Try again.');
+                return false;
+            }else{
+                $deltaHealth = $health - Fighter::ResolveClass($class)::$BaseHealth;
+                $deltaStrength = $strength - Fighter::ResolveClass($class)::$BaseStrength;
+            }
+        }
+
+        if($deltaHealth + $deltaStrength != $pointsSpend){
+            $action = $NameOfAction.'WithError';
+            $this->$action('You can only use as many points as you have. Do not try to cheat the system.');
+            return false;
+        }
+        return true;
+    }
 
 
     public function GetAll($start, $count){

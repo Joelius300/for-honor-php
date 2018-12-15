@@ -48,6 +48,9 @@ class SelectBar {
         if (SelectBarContainer.avaiablePoints > 0) {
             this.HideMinus(+this.hiddenInput.value <= 1);
             this.HidePlus(+this.hiddenInput.value >= this.healthItems.length);
+        } else {
+            this.HideMinus(false);
+            this.HidePlus(true);
         }
     }
 
@@ -65,7 +68,9 @@ class SelectBar {
         if (hide) {
             this.minusButton.style.visibility = 'hidden';
         } else {
-            this.minusButton.style.visibility = 'visible';
+            if (+this.hiddenInput.value > 1) {
+                this.minusButton.style.visibility = 'visible';
+            }
         }
     }
 }

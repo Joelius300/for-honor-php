@@ -21,7 +21,7 @@
             var defaults = {};
             <?php Fighter::FillDefaults(); ?> //Fills the JS 'defaults' array
 
-            var switcher = new ClassSwitcher(defaults);
+            var switcher = new ClassSwitcher(defaults, <?= $avaiablePoints ?>);
 
             //Tells the Javascript how many times the user is allowed to upgrade his fighters points
             SelectBarContainer.avaiablePoints = <?= $avaiablePoints ?>;
@@ -81,7 +81,7 @@
 
         <?php
             if(isset($error)){
-                echo "<script>alert('$error');</script>";
+                echo "<script>alert('". htmlspecialchars($error) ."');</script>";
             }
         ?>
     </body>
