@@ -17,19 +17,20 @@
 
 <html>
     <head>
-        <script src="/js/ClassSwitcher.js?v=<?=time();?>"></script>     
         <script>
             var defaults = {};
             <?php Fighter::FillDefaults(); ?> //Fills the JS 'defaults' array
 
             var switcher = new ClassSwitcher(defaults);
 
+            //Tells the Javascript how many times the user is allowed to upgrade his fighters points
             SelectBarContainer.avaiablePoints = <?= $avaiablePoints ?>;
         </script>
     </head>
     <body>
         <div class='fighter_box'>
             <form action='/Fighter/insert' method='post'>
+                <input type='hidden' id='avaiablePointsInput' name='avaiablePoints' value='<?= $avaiablePoints ?>'>
                 <div class='class_info'>
                     <img id='classImage' src='/images/tank.jpg' height='100px' width='100px'>
                     <div>
@@ -69,9 +70,12 @@
                 selectBarhealth.Refresh();
             }
 
+            // selectBarstrength and selectBarhealth are the HTML Names generated 
+            // by the PHP Class which can be used in Javascript unlike the php SelectBars
             SelectBarContainer.selects = [selectBarstrength, selectBarhealth];
             SelectBarContainer.CheckAvaiablePoints();
 
+            //Checks and Updates the visibility of the selectBars 
             onSelectChanged();
         </script>
 

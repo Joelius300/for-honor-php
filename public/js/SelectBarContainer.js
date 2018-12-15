@@ -10,6 +10,8 @@ class SelectBarContainer {
             SelectBarContainer.avaiablePoints -= +diff;
         }
 
+        document.getElementById('avaiablePointsInput').value = SelectBarContainer.avaiablePoints;
+
         SelectBarContainer.CheckAvaiablePoints();
     }
 }

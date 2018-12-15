@@ -41,7 +41,7 @@ class SelectBar {
         this.CheckPoints();
 
         //console.log('Refreshed');
-        console.log(SelectBarContainer.avaiablePoints);
+        //console.log(SelectBarContainer.avaiablePoints);
     }
 
     CheckPoints() {
@@ -55,7 +55,9 @@ class SelectBar {
         if (hide) {
             this.plusButton.style.visibility = 'hidden';
         } else {
-            this.plusButton.style.visibility = 'visible';
+            if (+this.hiddenInput.value < this.healthItems.length) {
+                this.plusButton.style.visibility = 'visible';
+            }
         }
     }
 

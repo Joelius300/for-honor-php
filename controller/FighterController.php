@@ -103,7 +103,7 @@ class FighterController{
 
     public function insert(){
         if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], 'Create') || !$this->ValidateClass($_POST['class'], 'Create')){
-            // Erorrs already displayed in Validation itself (more specific error)
+            // Erorrs already displayed in Validation itself (allows for a more specific error)
             // $this->CreateWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
             return;
         }
@@ -113,6 +113,9 @@ class FighterController{
             
             $this->userRepos->updateFighterID($_SESSION['userID'], $insert_id);
             $_SESSION['fighterID'] = $insert_id;
+
+            $this->userRepos->updateAvaiablePoints($_SESSION['userID'], $_POST['avaiablePoints']);
+
             header('Location: /');
         }catch(Exception $e){
             $this->CreateWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
@@ -128,6 +131,9 @@ class FighterController{
 
         try{
             $this->fighterRepos->update($_POST['id'], $_POST['name'], $_POST['healthValue'], $_POST['strengthValue']); 
+
+            $this->userRepos->updateAvaiablePoints($_SESSION['userID'], $_POST['avaiablePoints']);
+
             header('Location: /');
         }catch (Exception $e){
             $this->EditWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');

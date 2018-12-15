@@ -13,10 +13,11 @@
 
 <!-- selects (this v=... is only for testing purposes! it prevents the browser from caching the css-->
 <link href="/css/select.css?v=<?=time();?>" rel="stylesheet" type="text/css">
-<script src="/js/select.js?v=<?=time();?>"></script> 
+<!-- <script src="/js/select.js?v=<?=time();?>"></script>  -->
 <script src="/js/SelectBarContainer.js?v=<?=time();?>"></script>     
 <script src="/js/SelectBar.js?v=<?=time();?>"></script>     
 
+<script src="/js/ClassSwitcher.js?v=<?= time(); ?>"></script>     
 
 
 <?php

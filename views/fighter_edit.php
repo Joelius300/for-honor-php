@@ -17,11 +17,17 @@
 
 <html>
     <head>
+        <script>
+            //Tells the Javascript how many times the user is allowed to upgrade his fighters points
+            SelectBarContainer.avaiablePoints = <?= $avaiablePoints ?>;
+        </script>
     </head>
     <body>
         <div class='fighter_box'>
             <form action='/Fighter/update' method='post'>
-            <input id='id' name='id' type="hidden" value=<?= $FighterID ?>>
+            <input type='hidden' id='avaiablePointsInput' name='avaiablePoints' value='<?= $avaiablePoints ?>'>            
+            
+            <input id='id' name='id' type="hidden" value='<?= $FighterID ?>'>
 
                 <div class='class_info'>
                     <img id='classImage' src='<?= $Fighter->class::$picURL ?>' height='100px' width='100px'>
@@ -48,6 +54,16 @@
             </form>
             <a href="/Fighter/Delete">Löschen</a>
         </div>
+
+        <script>
+
+            // selectBarstrength and selectBarhealth are the HTML Names generated 
+            // by the PHP Class which can be used in Javascript unlike the php SelectBars
+            SelectBarContainer.selects = [selectBarstrength, selectBarhealth];
+
+            //Checks and Updates the visibility of the selectBars 
+            SelectBarContainer.CheckAvaiablePoints();
+        </script>
 
         <?php
             if(isset($error)){

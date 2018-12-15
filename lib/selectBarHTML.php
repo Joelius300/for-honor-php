@@ -20,6 +20,8 @@
 
     <script>
         var selectBar<?= $name ?> = new SelectBar('<?= $name ?>', '<?= $selectedColor ?? '' ?>');
+        
+        selectBar<?= $name ?>.HidePlus(true);
         selectBar<?= $name ?>.Refresh();
     </script>
 </body>
