@@ -22,6 +22,9 @@ class Assassin extends Fighter{
     }
 
 
+    //Overwrites the abstract function from fighter
+    //Its the only one which has the interruptable option that's also why it has to be optional
+    //The interruptable is important because a counter strike cannot be blocked or countered
     public function Attack($enemy, $interruptable = true){
         $blocked = false;
         $countered = false;
@@ -49,9 +52,11 @@ class Assassin extends Fighter{
             $winner = $this;
         }
 
+        //it returns all valuable information from this attack/round which will be processed in the game loop
         return new Round($this, $enemy, $blocked, $countered, $doubled, $winner);
     }
 
+    //calculates the chance of the tank blocking the attack and act accordingly
     private function AttackTank($enemy, $interruptable){
         if($interruptable && rand(1, 100) <= Tank::$BlockChance){
             return true;
@@ -61,6 +66,7 @@ class Assassin extends Fighter{
         }
     }
 
+    //calculates the chance of the assassin countering the attack and act accordingly
     private function AttackAssassin($enemy, $interruptable){
         if($interruptable && rand(1, 100) <= Assassin::$CounterChance){
             $enemy->Attack($this, false);
@@ -71,6 +77,7 @@ class Assassin extends Fighter{
         }
     }
     
+    //hits the warrior because he has no chance of protection
     private function AttackWarrior($enemy){
         $enemy->calcHealth -= $this->calcStrength;
     }

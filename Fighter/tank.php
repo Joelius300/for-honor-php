@@ -24,7 +24,7 @@ class Tank extends Fighter{
     }
 
     
-
+    //Overwrites the abstract function from fighter
     public function Attack($enemy){
         $blocked = false;
         $countered = false;
@@ -52,9 +52,11 @@ class Tank extends Fighter{
             $winner = $this;
         }
 
+        //it returns all valuable information from this attack/round which will be processed in the game loop
         return new Round($this, $enemy, $blocked, $countered, $doubled, $winner);
     }
 
+    //calculates the chance of the tank blocking the attack and act accordingly
     private function AttackTank($enemy){
         if(rand(1, 100) <= Tank::$BlockChance){
             return true;
@@ -64,6 +66,7 @@ class Tank extends Fighter{
         }
     }
 
+    //calculates the chance of the assassin countering the attack and act accordingly
     private function AttackAssassin($enemy){
         if(rand(1, 100) <= Assassin::$CounterChance){
             $enemy->Attack($this, false);
@@ -74,6 +77,7 @@ class Tank extends Fighter{
         }
     }
     
+    //hits the warrior because he has no chance of protection
     private function AttackWarrior($enemy){
         $enemy->calcHealth -= $this->calcStrength;
     }

@@ -1,4 +1,7 @@
 <?php
+//similar concept like view
+//takes some start values to initialize a selectBar
+//gives possibilities for further extensions (like many other things in this project)
 class selectBar{
 
     private $properties = array();

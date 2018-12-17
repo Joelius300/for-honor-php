@@ -1,5 +1,8 @@
 <?php
 
+
+//Beholds important information about one round during a fight
+//most values are copied, others are referenced
 class Round{
     private $attackerName;
     private $attackerCalcStrength;
@@ -38,6 +41,7 @@ class Round{
         }
     }
 
+    //Write the html code for one round inside a panel
     public function output(){
         echo "<span class='AttackerName'>" . $this->attackerName . "</span> <img src='/images/attack.png' width='25px' height='25px'> <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage <img src='/images/attack.png' width='25px' height='25px'> <span class='DefenderName'>" . $this->defenderName . "</span> <br>";
         if($this->defenderBlocked){
@@ -58,7 +62,7 @@ class Round{
         }
     }
 
-
+    //output html to call the winner if there is one aka it was the last round
     private static function callWinner($winner){
         echo "<img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'><span class='WinnerName'>" . htmlspecialchars($winner->name) . "</span><img src='https://upload.wikimedia.org/wikipedia/commons/a/a6/Trophy_Flat_Icon.svg' width='50px' height='50px'>";
     }

@@ -23,6 +23,7 @@ class Warrior extends Fighter{
 
     private $lastDoubled;
 
+    //Overwrites the abstract function from fighter
     public function Attack($enemy){
         $blocked = false;
         $countered = false;
@@ -51,9 +52,13 @@ class Warrior extends Fighter{
             $winner = $this;
         }
 
+        //it returns all valuable information from this attack/round which will be processed in the game loop
         return new Round($this, $enemy, $blocked, $countered, $this->lastDoubled, $winner);
     }
 
+    //calculates the chance of the tank blocking the attack and act accordingly
+    //also calculate if you attack twice and do so accordingly
+    //the second attack cannot be interrupted and will also not attack once more
     private function AttackTank($enemy, $second, $interruptable){
         if($interruptable && rand(1, 100) <= Tank::$BlockChance){
             return true;
@@ -70,6 +75,9 @@ class Warrior extends Fighter{
         }
     }
 
+    //calculates the chance of the assassin countering the attack and act accordingly
+    //also calculate if you attack twice and do so accordingly
+    //the second attack cannot be interrupted and will also not attack once more
     private function AttackAssassin($enemy, $second, $interruptable){
         if($interruptable && rand(1, 100) <= Assassin::$CounterChance){
             $enemy->Attack($this, false);
@@ -87,6 +95,9 @@ class Warrior extends Fighter{
         }
     }
     
+    //hits the warrior because he has no chance of blocking or countering
+    //also calculate if you attack twice and do so accordingly
+    //the second attack cannot be interrupted and will also not attack once more
     private function AttackWarrior($enemy, $second){
         $enemy->calcHealth -= $this->calcStrength;
 

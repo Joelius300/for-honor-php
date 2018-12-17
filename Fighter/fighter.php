@@ -57,9 +57,11 @@ abstract class Fighter{
         $this->calcStrength = $this->strength * self::$strengthMultiplier;
     }
 
+    //Static multipliers used like global variables
     public static $healthMultiplier = 150;
     public static $strengthMultiplier = 25;
 
+    //Variables used for every fighter class
     public $id;
 
     public $name;

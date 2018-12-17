@@ -42,6 +42,7 @@ class UserRepository extends Repository
         }
     }
 
+    //returns the user with given name
     public function readByUsername($username){
         // Query erstellen
         $query = "SELECT * FROM {$this->tableName} WHERE username=?";
@@ -70,10 +71,12 @@ class UserRepository extends Repository
         return $row;
     }
 
+    //read only the points from the table
     public function getAvaiablePoints($id){
         return $this->readById($id)->Points;
     }
 
+    //update only the points in the table
     public function updateAvaiablePoints($id, $points){
         $query = "UPDATE $this->tableName set `Points` = ? where `id` = ?";
 
@@ -85,6 +88,7 @@ class UserRepository extends Repository
         }
     }
 
+    //update all the stats for a user
     public function updateStats($userID, $totalGames, $wins){
         $query = "UPDATE $this->tableName set `TotalGames` = ?, `Wins` = ? where `id` = ?";
 
@@ -96,6 +100,7 @@ class UserRepository extends Repository
         }
     }
 
+    //set a new fighter id (when fighter is created)
     public function updateFighterID($userID, $fighterID){
         $query = "UPDATE $this->tableName set `Fighter_ID` = ? where `id` = ?";
 
@@ -107,6 +112,7 @@ class UserRepository extends Repository
         }
     }
 
+    //checks if a user with said name is registered in the db
     public function userExists($username){
         $query = "SELECT * FROM {$this->tableName} WHERE username=?";
 

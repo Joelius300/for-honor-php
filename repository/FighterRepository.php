@@ -42,6 +42,7 @@ class FighterRepository extends Repository
         }
     }
 
+    //returns all fighters that aren't the users (you don't want to fight your own fighter)
     public function readAllJoin($start = 0, $amount = 100)
     {
         if(!isset($_SESSION['userID'])){
