@@ -179,6 +179,7 @@ class FighterController{
         return true;
     }
 
+    //Checks if the length of the name is acceptable (in a real world scenario you would access global variables for the upper (and lower) limits)
     private function ValidateName($name, $NameOfAction){
         if(strlen($name) > 30 || strlen($name) < 1 || !isset($name)){
             $action = $NameOfAction.'WithError';
@@ -265,6 +266,7 @@ class FighterController{
     public function Delete(){
         if(isset($_SESSION['fighterID'])){
             $this->fighterRepos->deleteById($_SESSION['fighterID']);
+            $this->userRepos->updateAvaiablePoints($_SESSION['userID'], 3);
 
             unset($_SESSION['fighterID']);
 

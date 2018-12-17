@@ -4,6 +4,10 @@ require_once 'tank.php';
 require_once 'assassin.php';
 require_once 'warrior.php';
 
+
+//This class is the master class for all other fighter classes
+//It is only intended to be derived from not to be instanciated
+//This class also hold static values which are used globally
 abstract class Fighter{
     private static $ClassesNames = array(0 => 'Tank', 1 => 'Assassin', 2 => 'Warrior');
 
@@ -23,6 +27,8 @@ abstract class Fighter{
         }
     }
 
+    //This Javascript code is echoed within a view. This is needed to transfer the php variables to js variables.
+    //These js variables are then used for switching between classes in the create view
     public static function FillDefaults(){
         $i = 0;
         for($i = 0; $i < count(self::$ClassesNames); $i++){
@@ -37,12 +43,15 @@ abstract class Fighter{
         }
     }
 
+    //This code makes use of the static php variables that can be accessed by a counter (here $i) 
+    //The generated html code is echoed inside of a select within the create view to enable the user to switch between classes
     public static function GetOptionsHTML(){
         for($i = 0; $i < count(self::$ClassesNames); $i++){
             echo '<option value=' .$i. '>' .self::$ClassesNames[$i]. '</option>';
         }
     }
 
+    //This is a simple multiplication to reduce redundant code in other places as well as the error quote
     public function CalcFightValues(){
         $this->calcHealth = $this->health * self::$healthMultiplier;
         $this->calcStrength = $this->strength * self::$strengthMultiplier;

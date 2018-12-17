@@ -4,25 +4,32 @@ require_once('../repository/UserRepository.php');
 require_once('../repository/FighterRepository.php');
 require_once("../lib/View.php");
 
+//This controller is used for everything related to Users. This includes
+// * Login
+// * Logout
+// * Validate credentials etc for Insert or Login
+// * Read and prepare stats from db for further use in Views and Fights
+// * etc
 
 class UserController
 {
-    public static $ERROR;
-
     private $repos;
     private $fighterRepos;
 
+    //Instanciates the repos needed
     public function __construct(){
         $this->repos = new UserRepository();
         $this->fighterRepos = new FighterRepository();
     }
 
+    //Not used -> just redirect
     public function index()
     {
         //Anfrage weiterleiten (HTTP 302)
         header('Location: /user/Login');
     }
 
+    //This prepares the stats read by the repos for further use in views and fights
     public function GetStats($userID){
         $user = $this->repos->readById($userID);
         $stats = array();
@@ -35,10 +42,12 @@ class UserController
         return $stats;
     }
 
+    //This is only used that we don't need another instance of the repos where there is already one of the controller
     public function UpdateStats($userID, $totalGames, $wins){
         $this->repos->updateStats($userID, $totalGames, $wins);
     }
 
+    //Wrapper for the methode in the repos (validates then inserts)
     public function Register()
     {
         if(!$this->ValidateCredentials($_POST['username'], $_POST['password'])){
@@ -53,6 +62,7 @@ class UserController
         }
     }
 
+    //Checks the format of the credentials (not if they exist in the db)
     private function ValidateCredentials($username, $password){
         if(strlen($username) > 30 || strlen($username) < 1 || empty($username)){
             $this->CreateWithError('Username must contain between 1 and 30 chars (incl.).');
@@ -67,6 +77,7 @@ class UserController
         return true;
     }
     
+    //Same as Create but shows an Error first
     private function CreateWithError($error){
         unset($_SESSION['userID']);
         $view = new View('user_create');
@@ -75,6 +86,7 @@ class UserController
         $view->display();
     }
 
+    //Same as Login but shows an Error first
     private function LoginWithError($error){
         unset($_SESSION['userID']);
         unset($_SESSION['fighterID']);
@@ -85,6 +97,8 @@ class UserController
         $view->display();
     }
 
+    //Has to check if user is already logged and if so redirect them
+    //Otherwise show view for creating a user
     public function Create(){
         if(isset($_SESSION['userID'])){
             header('Location: /');
@@ -95,6 +109,8 @@ class UserController
         }
     }
 
+    //Has to check if user is already logged and if so redirect them
+    //Otherwise show view for Login
     public function Login(){
         if(isset($_SESSION['userID'])){
             header('Location: /');
@@ -106,6 +122,7 @@ class UserController
         }
     }
 
+    //reset(/unset) everything and destroy session
     public function Logout(){
         unset($_SESSION['userID']);
         unset($_SESSION['fighterID']);
@@ -119,6 +136,8 @@ class UserController
         $this->LoginUser($_POST['username'], $_POST['password']);
     }
 
+    //Check login credentials and if they are correct log the user in (set userID)
+    //Otherwise return to the view with an error
     private function LoginUser($username, $password){
         try{
             $user = $this->repos->readByUsername($username);
@@ -138,7 +157,7 @@ class UserController
         }   
     }
 
-
+    //Wrapping for methode from repos (validation + forwarding)
     public function Delete(){
         if(isset($_SESSION['userID'])){
             $this->repos->deleteById($_SESSION['userID']);
