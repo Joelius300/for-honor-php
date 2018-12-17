@@ -48,8 +48,8 @@ abstract class Fighter{
         $this->calcStrength = $this->strength * self::$strengthMultiplier;
     }
 
-    public static $healthMultiplier = 50;
-    public static $strengthMultiplier = 10;
+    public static $healthMultiplier = 150;
+    public static $strengthMultiplier = 25;
 
     public $id;
 
