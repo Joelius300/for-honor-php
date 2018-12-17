@@ -14,7 +14,7 @@
 				<a class="panel-heading" 
 					href = '/Fight/Fight?enemy=<?= $fighter->id ?>'>
 					<span class='class'>
-						<img id='classImage' src='<?= $fighter->class::$picURL; ?>' height='30px' width='30px'>
+						<img src='<?= $fighter->class::$picURL; ?>' alt="class image" height='30' width='30'>
 					</span>
 					<span class='name padding'>
 						<?= htmlspecialchars($fighter->name); ?>

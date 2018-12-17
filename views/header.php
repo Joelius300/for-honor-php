@@ -1,13 +1,14 @@
 <?php require_once('../lib/SessionHeader.php'); ?>
+<?php require_once('HeaderForEverything.php'); ?>
 
-<!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- selects (this v=... is only for testing purposes! it prevents the browser from caching the css-->
+    <link href="/css/select.css?v=<?=time();?>" rel="stylesheet" type="text/css">
+    <!-- <script src="/js/select.js?v=<?=time();?>"></script>  -->
+    <script src="/js/SelectBarContainer.js?v=<?=time();?>"></script>     
+    <script src="/js/SelectBar.js?v=<?=time();?>"></script>     
 
-    <title><?= $title ?></title>
+    <script src="/js/ClassSwitcher.js?v=<?= time(); ?>"></script>     
+    
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">

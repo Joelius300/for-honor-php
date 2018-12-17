@@ -1,4 +1,3 @@
-<body>
     <div class='selectContainer'>
         <input id='<?= $name ?>Value' name='<?= $name ?>Value' type="hidden" value='<?=$startValue?>'>
 
@@ -24,4 +23,3 @@
         selectBar<?= $name ?>.HidePlus(true);
         selectBar<?= $name ?>.Refresh();
     </script>
-</body>

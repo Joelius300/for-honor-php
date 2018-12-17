@@ -1,12 +1,17 @@
+<?php require_once('HeaderForEverything.php'); ?>
+</head>
+<body>
+	<div>
+
 <form class="form-horizontal" action="/user/doLogin" method="post">
 	<div class="component" data-html="true">
-		<img class="login-pic" src="/images/main-symbol.jpg" width="200px" height="200px">
+		<img class="login-pic" src="/images/main-symbol.jpg" alt="forhonor-symbol" width="200" height="200">
 		<div>
 			<div class="center">
 				<label class="control-label" for="username">Username</label>
 			</div>
 		  <div class="center">
-		  	<input id="username" name="username" type="text" maxLength='30' class="form-control input-md center" value=<?= $username ?? ''?>>
+		  	<input id="username" name="username" placeholder="username" type="text" maxLength='30' class="form-control input-md center" value="<?= $username ?? ''?>">
 		  </div>
 		</div>
 		<div>
@@ -14,7 +19,7 @@
 				<label class="control-label" for="password">Password</label>
 			</div>
 		  <div class="center">
-		  	<input id="password" name="password" type="password" class="form-control input-md center">
+		  	<input id="password" name="password" placeholder="password" type="password" class="form-control input-md center">
 		  </div>
 		</div>
 	      <!-- <label class="col-md-2 control-label" for="textinput">&nbsp;</label> -->

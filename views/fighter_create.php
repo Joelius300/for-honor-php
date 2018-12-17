@@ -15,8 +15,7 @@
     $health->selectedColor = '#3661aa';
 ?>
 
-<html>
-    <head>
+
         <script>
             var defaults = {};
             <?php Fighter::FillDefaults(); ?> //Fills the JS 'defaults' array
@@ -26,17 +25,15 @@
             //Tells the Javascript how many times the user is allowed to upgrade his fighters points
             SelectBarContainer.avaiablePoints = <?= $avaiablePoints ?>;
         </script>
-    </head>
-    <body>
         <div class='fighter_box'>
             <form action='/Fighter/insert' method='post'>
                 <input type='hidden' id='avaiablePointsInput' name='avaiablePoints' value='<?= $avaiablePoints ?>'>
                 <div class='class_info'>
-                    <img id='classImage' src='/images/tank.jpg' height='100px' width='100px'>
+                    <img id='classImage' src='/images/tank.jpg' alt="class image" height='100' width='100'>
                     <div>
                         <div class="class_select">
                             <h4>Class</h4>
-                            <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();" value='0'>
+                            <select class="form-control" id="classSelect" name="class" onchange="onSelectChanged();">
                                 <?php Fighter::GetOptionsHTML(); ?>
                             </select>
                         </div>
@@ -84,5 +81,3 @@
                 echo "<script>alert(\"". htmlspecialchars($error) ."\");</script>";
             }
         ?>
-    </body>
-</html>

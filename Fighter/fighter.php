@@ -39,7 +39,7 @@ abstract class Fighter{
 
     public static function GetOptionsHTML(){
         for($i = 0; $i < count(self::$ClassesNames); $i++){
-            echo '<option value=' .$i. '>' .self::$ClassesNames[$i]. '</option>\n\r';
+            echo '<option value=' .$i. '>' .self::$ClassesNames[$i]. '</option>';
         }
     }
 

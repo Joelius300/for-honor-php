@@ -15,14 +15,11 @@
     $health->selectedColor = '#3661aa';
 ?>
 
-<html>
-    <head>
+
         <script>
             //Tells the Javascript how many times the user is allowed to upgrade his fighters points
             SelectBarContainer.avaiablePoints = <?= $avaiablePoints ?>;
         </script>
-    </head>
-    <body>
         <div class='fighter_box'>
             <form action='/Fighter/update' method='post'>
             <input type='hidden' id='avaiablePointsInput' name='avaiablePoints' value='<?= $avaiablePoints ?>'>            
@@ -30,7 +27,7 @@
             <input id='id' name='id' type="hidden" value='<?= $FighterID ?>'>
 
                 <div class='class_info'>
-                    <img id='classImage' src='<?= $Fighter->class::$picURL ?>' height='100px' width='100px'>
+                    <img id='classImage' src='<?= $Fighter->class::$picURL ?>' alt="class image" height='100' width='100'>
                     <div class="description" id="classDescription">
                         <h4>Class</h4>
                         <h5><?= $Fighter->class ?></h5>
@@ -70,5 +67,3 @@
                 echo "<script>alert(\"". htmlspecialchars($error) ."\");</script>";
             }
         ?>
-    </body>
-</html>
