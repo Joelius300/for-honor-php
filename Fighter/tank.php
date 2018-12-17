@@ -9,7 +9,7 @@ class Tank extends Fighter{
     public static $BaseHealth = 7;
     public static $BaseStrength = 4;
 
-    public static $BlockChance = 30;
+    public static $BlockChance = 40;
     
     public static $picURL = "/images/tank.jpg";
     public static $Description;

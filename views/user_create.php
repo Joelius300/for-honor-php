@@ -24,7 +24,7 @@
 		<div>
 	      <label class="control-label" for="textinput">&nbsp;</label>
 		  <div class="center">
-		    <input id="submit" name="submit" value="Sign up" type="submit" class="btn btn-primary">
+		    <input id="submit" name="submit" value="sign up" type="submit" class="btn btn-primary">
 			</div>
 			<a class="center" href="/User/login">login</a>
 		</div>
