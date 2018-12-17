@@ -30,7 +30,7 @@ body {
 
 .description {
     margin-left: 50px;
-    max-width: 300;
+    max-width: 300px;
 }
 
 .form-control{
@@ -47,7 +47,7 @@ body {
 
 .center{
     display: block;
-    margin: 10 auto;
+    margin: 10px auto;
     text-align: center;
 }
 
@@ -68,7 +68,12 @@ select, option{
 #home{
     display: flex;
     padding: 25px;
-    margin: 0 auto;
+    margin: 0px auto;
+}
+
+.home_pics:hover, .home_pics{
+    outline: none;
+    user-select: none;
 }
 
 #fight{
@@ -163,4 +168,25 @@ a.button:active, a.button:focus{
 a.button:hover{
     text-decoration: none;
     /* INSERT BOXSHADOW ETC HERE */
+}
+
+.Damage{
+    color: #770e23;
+    font-weight: bold;
+}
+.Health{
+    color: #3661aa;
+    font-weight: bold;
+}
+
+.AttackerName{
+    font-weight: bold;
+}
+
+.DefenderName{
+    font-weight: bold;
+}
+
+.WinnerName{
+    font-weight: bold;
 }
