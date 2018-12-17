@@ -9,7 +9,7 @@
 		<div>
 			<div class="center">
 				<label class="control-label" for="username">Username</label>
-			</div>s
+			</div>
 		  <div class="center">
 		  	<input id="username" name="username" type="text" class="form-control input-md center" maxlength='30' placeholder='username' required>
 		  </div>
