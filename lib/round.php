@@ -39,7 +39,7 @@ class Round{
     }
 
     public function output(){
-        echo "<span class='AttackerName'>" . $this->attackerName . "</span> <img src='/images/attack.png' width='25px' height='25px'> <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage <img src='/images/attack.png' width='25px' height='25px'> <span class='Damage'> <span class='DefenderName'>" . $this->defenderName . "</span> <br>";
+        echo "<span class='AttackerName'>" . $this->attackerName . "</span> <img src='/images/attack.png' width='25px' height='25px'> <span class='Damage'>" . $this->attackerCalcStrength . "</span> damage <img src='/images/attack.png' width='25px' height='25px'> <span class='DefenderName'>" . $this->defenderName . "</span> <br>";
         if($this->defenderBlocked){
             echo "<span class='DefenderName'>" . $this->defenderName . "</span> <img src='/images/tank.jpg' width='25px' height='25px'> the hit and didn't take damage.<br>";
         }else if($this->defenderCountered){
