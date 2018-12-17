@@ -6,7 +6,7 @@
 <div class="fighterListContainer">
 	<?php if (empty($fighters)): ?>
 		<div class="dhd">
-			<h2 class="item title">Keine fighter gefunden.</h2>
+			<h2 class="item title">Your enemies feared you and disappeared.</h2>
 		</div>
 	<?php else: ?>
 		<?php foreach ($fighters as $fighter): ?>
