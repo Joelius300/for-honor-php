@@ -40,7 +40,7 @@
                 <br>
                 
                 <h4>Name</h4>
-                <input class="form-control" name='name' type='text' value='<?= htmlspecialchars($Fighter->name) ?>' maxLength='30' required>
+                <input class="form-control" name='name' type='text' value="<?= htmlspecialchars($Fighter->name) ?>" maxLength='30' required>
                 <br>
                 <br>
                 <div class='fighter_info'>
@@ -52,7 +52,7 @@
 
                 <input type="submit" value="Save" class="btn btn-primary">
             </form>
-            <a href="/Fighter/Delete">Löschen</a>
+            <a href="/Fighter/Delete">Delete</a>
         </div>
 
         <script>
@@ -66,8 +66,8 @@
         </script>
 
         <?php
-            if(isset($error)){
-                echo "<script>alert('". htmlspecialchars($error) ."');</script>";
+            if(!empty($error)){
+                echo "<script>alert(\"". htmlspecialchars($error) ."\");</script>";
             }
         ?>
     </body>

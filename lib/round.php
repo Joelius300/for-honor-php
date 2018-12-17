@@ -17,18 +17,18 @@ class Round{
     public $gameOver;
     
     public function __construct($attacker, $defender, $defenderBlocked = false, $defenderCountered = false, $attackerDoubled = false, $winner = null){
-        $this->attackerName = $attacker->name;
-        $this->attackerCalcStrength = $attacker->calcStrength;
-        $this->attackerCalcHealth = $attacker->calcHealth;
+        $this->attackerName = htmlspecialchars($attacker->name);
+        $this->attackerCalcStrength = htmlspecialchars($attacker->calcStrength);
+        $this->attackerCalcHealth = htmlspecialchars($attacker->calcHealth);
 
-        $this->defenderName = $defender->name;
-        $this->defenderCalcStrength = $defender->calcStrength;
-        $this->defenderCalcHealth = $defender->calcHealth;
+        $this->defenderName = htmlspecialchars($defender->name);
+        $this->defenderCalcStrength = htmlspecialchars($defender->calcStrength);
+        $this->defenderCalcHealth = htmlspecialchars($defender->calcHealth);
 
 
-        $this->defenderBlocked = $defenderBlocked;
-        $this->defenderCountered = $defenderCountered;
-        $this->attackerDoubled = $attackerDoubled;
+        $this->defenderBlocked = htmlspecialchars($defenderBlocked);
+        $this->defenderCountered = htmlspecialchars($defenderCountered);
+        $this->attackerDoubled = htmlspecialchars($attackerDoubled);
 
         if(!empty($winner)){
             $this->gameOver = true;

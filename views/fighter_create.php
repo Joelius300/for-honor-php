@@ -80,8 +80,8 @@
         </script>
 
         <?php
-            if(isset($error)){
-                echo "<script>alert('". htmlspecialchars($error) ."');</script>";
+            if(!empty($error)){
+                echo "<script>alert(\"". htmlspecialchars($error) ."\");</script>";
             }
         ?>
     </body>

@@ -26,7 +26,7 @@
 </form>
 
 <?php
-if(!isset($_SESSION['userID']) && isset($error)){
-	echo "<script>alert('$error');</script>";
+if(!isset($_SESSION['userID']) && !empty($error)){
+	echo "<script>alert(\"". htmlspecialchars($error) ."\");</script>";
 }
 ?>

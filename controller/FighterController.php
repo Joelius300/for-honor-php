@@ -222,7 +222,7 @@ class FighterController{
 
         if($deltaHealth + $deltaStrength != $pointsSpend){
             $action = $NameOfAction.'WithError';
-            $this->$action('You can only use as many points as you have. Do not try to cheat the system.');
+            $this->$action('You can only use as many points as you have. Don\'t try to cheat the system.');
             return false;
         }
         return true;
