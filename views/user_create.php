@@ -1,7 +1,7 @@
 <?php require_once('HeaderForEverything.php'); ?>
 </head>
 <body>
-	<div>
+<div>
 
 <form data-toggle="validator" class="form-horizontal" action="/user/Register" method="post">
 	<div class="component" data-html="true">

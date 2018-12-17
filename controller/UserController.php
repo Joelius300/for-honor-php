@@ -140,10 +140,10 @@ class UserController
 
 
     public function Delete(){
-        if(isset($_SESSION['userID']) && !empty($_SESSION['userID'])){
+        if(isset($_SESSION['userID'])){
             $this->repos->deleteById($_SESSION['userID']);
             
-            if(isset($_SESSION['fighterID']) && !empty($_SESSION['fighterID'])){
+            if(isset($_SESSION['fighterID'])){
                 $this->fighterRepos->deleteById($_SESSION['fighterID']);
             }
 

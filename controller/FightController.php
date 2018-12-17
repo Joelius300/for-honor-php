@@ -1,12 +1,12 @@
 <?php
 
-//require_once('../repository/FighterRepository.php');
 require_once("../lib/View.php");
 require_once("../lib/round.php");
 require_once("../controller/FighterController.php");
 require_once("../controller/UserController.php");
 	
-
+//This controller does everything regarding the fight itself. 
+//Fighter conversion and the damage dealing is not handeled here but in the FighterController
 class FightController{
     private $fighterController;
     private $userController;
@@ -14,11 +14,13 @@ class FightController{
     private $yourTurn;
 
     public function __construct(){
-        //$this->fighterRepos = new FighterRepository();
         $this->fighterController = new FighterController();
         $this->userController = new UserController();
     }
 
+    //Default method opening when only the controller is called
+    //Only the first 5000 Fighters will be shown here and in a real world scenario
+    //this would be different 
     public function index()
     {
         $_SESSION['isAbleToFight'] = true;
@@ -29,6 +31,7 @@ class FightController{
         $view->display();
     }
 
+    //Start of the fight itself. Called Fight because that's what's written in the URL.
     public function Fight(){
         if($_SESSION['isAbleToFight']){
             $_SESSION['isAbleToFight'] = false;
@@ -45,6 +48,8 @@ class FightController{
         }
     }
 
+    //Hold the fighting cycle which produces the rounds that are going to be output 
+    //as soon as the fight is over
     private function doFight($yourself, $enemy){
         $rounds = array();
         $winner;
@@ -64,6 +69,8 @@ class FightController{
         $this->EndGame($rounds, $winner, $yourself->id);
     }
 
+    //Ends the game and displays what happened during the fight.
+    //The stats only change for the attacking user. 
     private function EndGame($rounds, $winner, $yourFighterID){   
         $youWon = $winner->id == $yourFighterID;
 
@@ -76,6 +83,7 @@ class FightController{
         $view->display();
     }
 
+    //Here are the calculations done that need to happen before calling the function connected to the DB
     private function UpdateUserStats($userID, $totalGamesDelta, $youWon){
         $stats = $this->userController->GetStats($userID);
         $totalGames = $stats['TotalGames'] + $totalGamesDelta;
@@ -84,6 +92,8 @@ class FightController{
         $this->userController->UpdateStats($userID, $totalGames, $wins);
     }
 
+    //Represents a single cycle in the doFight loop
+    //What fighter is attacking is stored in a bool which is looked at by the user who started the fight
     private function PlayRound($yourself, $enemy){
         $round;
 

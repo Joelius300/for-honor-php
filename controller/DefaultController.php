@@ -2,6 +2,10 @@
 require_once("../controller/UserController.php");
 
 /**
+ * 
+ * ALLE DEUTSCHEN KOMMENTARE HIER SIND VOM STANDARD BBC-MVC FRAMEWORK UND STIMMEN EVENTUELL 
+ * NICHT MIT DEN EFFEKTIVEN IMPLEMENTIERUNGEN ÜBEREIN!
+ * 
  * Der Controller ist der Ort an dem es für jede Seite, welche der Benutzer
  * anfordern kann eine Methode gibt, welche die dazugehörende Businesslogik
  * beherbergt.

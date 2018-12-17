@@ -3,12 +3,19 @@
 require_once('../repository/FighterRepository.php');
 require_once('../repository/UserRepository.php');
 require_once("../lib/View.php");
+
+//Includes the fighting classes
 require_once("../Fighter/fighter.php");
 require_once("../Fighter/assassin.php");
 require_once("../Fighter/tank.php");
 require_once("../Fighter/warrior.php");
 
-
+//This controller handles everything related to the fighter itself
+//This includes
+// * Creating a fighter from a row from the Database,
+// * Preparing fighters for updates, inserts and deletes + forwarding after the said actions
+// * Validating name, class, health-/stengthpoints, etc
+// * Showing views for creating and editing fighters
 class FighterController{
     private $fighterRepos;
     private $userRepos;
@@ -18,11 +25,13 @@ class FighterController{
         $this->userRepos = new UserRepository();
     }
 
+    //Not needed -> redirect to edit
     public function index()
     {
         header('Location: /Fighter/Edit');
     }
 
+    //Shows the create view because the methode name will be in the URL
     public function Create()
     {
         if(!isset($_SESSION['fighterID'])){
@@ -35,6 +44,7 @@ class FighterController{
         }
     }
 
+    //Shows the create view whilst adding an Error to it that will be displayed as an JS alert popup
     public function CreateWithError($error){
         $view = new View('fighter_create');
         $view->title = 'Kämpfer erstellen';
@@ -43,6 +53,7 @@ class FighterController{
         $view->display();
     }
 
+    //Shows the edit view because the methode name will be in the URL
     public function Edit()
     {
         if(isset($_SESSION['fighterID'])){
@@ -59,6 +70,7 @@ class FighterController{
         }
     }
 
+    //Just like CreateWithError
     public function EditWithError($error)
     {
         $loggedUser = $this->userRepos->readById($_SESSION['userID']);
@@ -72,9 +84,10 @@ class FighterController{
         $view->display();
     }
 
+    //Redirects data from db to create an instance of a fighter
     public function GetFighter($id){
         $result = $this->fighterRepos->readById($id);   
-        if(empty($result) || !isset($result)){
+        if(empty($result)){
             header('Location: /Fighter/Create');
         }
 
@@ -83,6 +96,7 @@ class FighterController{
         return $fighter;
     }
 
+    //Uses data from db to create a fighter instance that can be used for fighting
     private function GetFighterFromRow($result){              
         $class = Fighter::ResolveClass($result->Class);
 
@@ -90,7 +104,7 @@ class FighterController{
 
         $fighter->id = $result->id;
 
-        if(isset($result->userID) && !empty($result->userID) && isset($result->username) && !empty($result->username)) {
+        if(isset($result->userID) && isset($result->username)) {
             $fighter->userID = $result->userID;
             $fighter->username = $result->username;
         }
@@ -101,9 +115,10 @@ class FighterController{
         return $fighter;
     }
 
+    //Takes and validates the values from the form and hands them to the repository for storing it in the db
     public function insert(){
         if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], $_POST['avaiablePoints'], 'Create', $_POST['class'])){
-            // Erorrs already displayed in Validation itself (allows for a more specific error)
+            // Errors already displayed in Validation itself (allows for a more specific error)
             // $this->CreateWithError('Ein Fehler ist aufgetreten. Kontrollieren Sie Ihre Eingaben und versuchen Sie es erneut.');
             return;
         }
@@ -122,6 +137,7 @@ class FighterController{
         }
     }
 
+    //Prepares and validates values for update using functions from this class and the repository
     public function update(){
         if(!$this->ValidateEssentials($_POST['name'], $_POST['healthValue'], $_POST['strengthValue'], $_POST['avaiablePoints'], 'Edit', null)){
             // Erorrs already displayed in Validation itself (more specific error)
@@ -140,6 +156,7 @@ class FighterController{
         }
     }
 
+    //Puts together all the validation methods so you can reuse the parameters and also have all of them in one place
     private function ValidateEssentials($name, $health, $strength, $avaiablePoints, $NameOfAction, $class = null){
         if(!$this->ValidateName($name, $NameOfAction)){
             return false;
@@ -182,8 +199,9 @@ class FighterController{
         return true;
     }
 
+    //Checks if the health inside the valid range (in a real world scenario you would access global variables for the upper (and lower) limits)
     private function ValidateHealthRange($health, $NameOfAction){
-        if($health < 1 || $health > 10 || empty($health)){
+        if($health < 1 || $health > 10 || !isset($health)){
             $action = $NameOfAction.'WithError';
             $this->$action('Health can only be between 1 and 10 (incl.).');
             return false;
@@ -191,8 +209,9 @@ class FighterController{
         return true;
     }
 
+    //Checks if the strength inside the valid range (in a real world scenario you would access global variables for the upper (and lower) limits)
     private function ValidateStrengthRange($strength, $NameOfAction){
-        if($strength < 1 || $strength > 10 || empty($strength)){
+        if($strength < 1 || $strength > 10 || !isset($strength)){
             $action = $NameOfAction.'WithError';
             $this->$action('Strength can only be between 1 and 10 (incl.).');
             return false;
@@ -200,12 +219,14 @@ class FighterController{
         return true;
     } 
 
+    //Using the data from the db and the data that would apply after the changes go throught, 
+    //this function determines if it the changes are possible with the points the user has
     private function ValidatePointRelations($health, $strength, $avaiablePointsNow, $NameOfAction, $class=null){
         $pointsSpend = $this->userRepos->readByID($_SESSION['userID'])->Points - $avaiablePointsNow;
         $deltaHealth;
         $deltaStrength;
 
-        if(!empty($_SESSION['fighterID'])){
+        if(isset($_SESSION['fighterID'])){
             $fighterThen = $this->fighterRepos->readByID($_SESSION['fighterID']);
             $deltaHealth = $health - $fighterThen->HealthPoints;
             $deltaStrength = $strength - $fighterThen->StrengthPoints;
@@ -228,7 +249,8 @@ class FighterController{
         return true;
     }
 
-
+    //This is essentially the same as the readAllJoin methode from the repos but it directly instantiates
+    //a fighter from each row
     public function GetAll($start, $count){
         $rows = $this->fighterRepos->readAllJoin($start, $count);
         $fighters = array();
@@ -239,9 +261,9 @@ class FighterController{
         return $fighters;
     }
 
-
+    //Wraps the function from the repos with some additional actions and forwarding
     public function Delete(){
-        if(isset($_SESSION['fighterID']) && !empty($_SESSION['fighterID'])){
+        if(isset($_SESSION['fighterID'])){
             $this->fighterRepos->deleteById($_SESSION['fighterID']);
 
             unset($_SESSION['fighterID']);
